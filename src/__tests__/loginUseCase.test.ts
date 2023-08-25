@@ -1,6 +1,6 @@
-import {InMemoryUserRepository} from '../src/repositories/inMemoryUserRepository';
-import {UserRepository} from '../src/repositories/interfaces/UserRepository';
-import {LoginUseCase} from '../src/use-cases/loginUseCase/loginUseCase';
+import {InMemoryUserRepository} from '../repositories/inMemoryUserRepository';
+import {UserRepository} from '../repositories/interfaces/UserRepository';
+import {LoginUseCase} from '../use-cases/loginUseCase/loginUseCase';
 
 describe('login use case', () => {
   let userRepository: UserRepository;

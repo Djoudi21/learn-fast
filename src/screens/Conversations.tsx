@@ -1,10 +1,10 @@
 import {SafeAreaView, Text} from 'react-native';
 import React from 'react';
 
-export function Home() {
+export function Conversations() {
   return (
     <SafeAreaView>
-      <Text>HOME</Text>
+      <Text>Conv</Text>
     </SafeAreaView>
   );
 }

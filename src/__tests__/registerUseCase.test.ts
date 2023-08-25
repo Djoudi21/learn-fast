@@ -1,5 +1,5 @@
-import {RegisterUseCase} from '../src/use-cases/registerUseCase/registerUseCase';
-import {InMemoryUserRepository} from '../src/repositories/inMemoryUserRepository';
+import {RegisterUseCase} from '../use-cases/registerUseCase/registerUseCase';
+import {InMemoryUserRepository} from '../repositories/inMemoryUserRepository';
 
 describe('register use case', () => {
   let userRepository: InMemoryUserRepository;
