@@ -1,10 +1,21 @@
 import {SafeAreaView, Text} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import {ContactList} from '../components/ContactList';
 
 export function Contacts() {
+  const [contacts] = useState([
+    {
+      id: 1,
+      name: 'Fabienne',
+    },
+    {
+      id: 2,
+      name: 'Fay',
+    },
+  ]);
   return (
     <SafeAreaView>
-      <Text>Contacts</Text>
+      <ContactList contacts={contacts} />
     </SafeAreaView>
   );
 }
