@@ -10,7 +10,7 @@ export function ContactList({contacts}: Props) {
   return (
     <View>
       {contacts.map(contact => {
-        return <ContactListItem contact={contact} />;
+        return <ContactListItem key={contact.id} contact={contact} />;
       })}
     </View>
   );
