@@ -1,8 +1,12 @@
 import {View} from 'react-native';
 import React from 'react';
 import {ContactListItem} from './ContactListItem';
+import {CreatedContactResponse} from '../use-cases/createContactUseCase/type';
 
-export function ContactList({contacts}) {
+type Props = {
+  contacts: CreatedContactResponse[];
+};
+export function ContactList({contacts}: Props) {
   return (
     <View>
       {contacts.map(contact => {

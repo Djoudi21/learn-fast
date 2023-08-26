@@ -1,9 +1,10 @@
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import React, {useState} from 'react';
 import {ContactList} from '../components/ContactList';
+import {CreatedContactResponse} from '../use-cases/createContactUseCase/type';
 
 export function Contacts() {
-  const [contacts] = useState([
+  const [contacts] = useState<CreatedContactResponse[]>([
     {
       id: 1,
       name: 'Fabienne',
