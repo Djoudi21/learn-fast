@@ -11,7 +11,6 @@ export class inMemoryContactRepository implements ContactRepository {
       id: 1,
       ...contact,
     };
-    console.log('LA', this.contacts);
 
     this.contacts.push(newContact);
     return Promise.resolve(newContact);
