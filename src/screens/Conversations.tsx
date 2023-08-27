@@ -1,10 +1,38 @@
-import {SafeAreaView, Text} from 'react-native';
-import React from 'react';
+import {Pressable, SafeAreaView, Text} from 'react-native';
+import React, {useState} from 'react';
+import {CreatedContactResponse} from '../use-cases/createContactUseCase/type';
+import {ConversationList} from '../components/ConversationList';
 
-export function Conversations() {
+type Props = {
+  navigation: any;
+};
+export function Conversations({navigation}: Props) {
+  const [conversations] = useState([
+    {
+      id: 1,
+      title: 'Conv1',
+    },
+    {
+      id: 2,
+      title: 'Conv2',
+    },
+  ]);
   return (
     <SafeAreaView>
-      <Text>Conv</Text>
+      <ConversationList
+        conversations={conversations}
+        navigation={navigation}
+        button={
+          <Pressable
+            onPress={() => {
+              navigation.navigate('ConversationStackNavigator', {
+                screen: 'AddConversation',
+              });
+            }}>
+            <Text>Add</Text>
+          </Pressable>
+        }
+      />
     </SafeAreaView>
   );
 }
