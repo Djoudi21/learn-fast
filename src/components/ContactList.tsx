@@ -7,12 +7,15 @@ type Props = {
   contacts: CreatedContactResponse[];
   navigation: any;
   button: ReactNode;
+  logoTitle: ReactNode;
 };
-export function ContactList({contacts, navigation, button}: Props) {
+export function ContactList({contacts, navigation, button, logoTitle}: Props) {
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => button,
+      headerTitle: () => logoTitle,
+      headerRight: () => [button],
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigation]);
   return (
     <View>

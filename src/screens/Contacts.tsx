@@ -1,4 +1,4 @@
-import {Pressable, SafeAreaView, Text} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {ContactList} from '../components/ContactList';
 import {CreatedContactResponse} from '../use-cases/createContactUseCase/type';
@@ -24,15 +24,17 @@ export function Contacts({navigation}: Props) {
         contacts={contacts}
         navigation={navigation}
         button={
-          <Pressable
+          <TouchableOpacity
+            key={'tutu'}
             onPress={() => {
               navigation.navigate('ContactStackNavigator', {
                 screen: 'AddContact',
               });
             }}>
-            <Text>Add</Text>
-          </Pressable>
+            <Text className="ml-4">Add</Text>
+          </TouchableOpacity>
         }
+        logoTitle={<Text>TITLE</Text>}
       />
     </SafeAreaView>
   );

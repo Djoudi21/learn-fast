@@ -1,4 +1,4 @@
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {CreatedContactResponse} from '../use-cases/createContactUseCase/type';
 
@@ -8,16 +8,15 @@ type Props = {
 };
 export function ContactListItem({contact, navigation}: Props) {
   return (
-    <View className="w-full h-20 border border-solid p-4 flex items-center justify-center">
-      <Pressable
-        key={contact.id}
-        onPress={() => {
-          navigation.navigate('ContactStackNavigator', {
-            screen: 'ContactDetails',
-          });
-        }}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('ContactStackNavigator', {
+          screen: 'ContactDetails',
+        });
+      }}>
+      <View className="w-full h-20 border border-solid p-4 flex items-center justify-center">
         <Text>{contact.name}</Text>
-      </Pressable>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 }
