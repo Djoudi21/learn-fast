@@ -1,4 +1,5 @@
 import {ContactRepository} from '../../repositories/interfaces/ContactRepository';
+import {Contact} from './type';
 
 export class CreateContactUseCase {
   private contactRepository: ContactRepository;

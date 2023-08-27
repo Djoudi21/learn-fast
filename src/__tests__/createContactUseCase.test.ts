@@ -8,6 +8,7 @@ describe('create contact use case', () => {
   beforeEach(() => {
     contactRepository = new inMemoryContactRepository();
     createContactUseCase = new CreateContactUseCase(contactRepository);
+    contactRepository.contacts = [];
   });
   it('should create contact', async () => {
     const newContact = {
@@ -16,5 +17,6 @@ describe('create contact use case', () => {
     const createdContact = await createContactUseCase.execute(newContact);
     expect(contactRepository.contacts).toHaveLength(1);
     expect(createdContact).toHaveProperty('id');
+    expect(contactRepository.contacts[0]).toHaveProperty('id');
   });
 });

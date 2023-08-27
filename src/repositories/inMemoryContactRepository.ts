@@ -1,12 +1,19 @@
 import {ContactRepository} from './interfaces/ContactRepository';
+import {
+  Contact,
+  CreatedContactResponse,
+} from '../use-cases/createContactUseCase/type';
 
 export class inMemoryContactRepository implements ContactRepository {
-  contacts = [];
+  contacts: CreatedContactResponse[] = [];
   createContact(contact: Contact): Promise<CreatedContactResponse> {
-    const response = {
-      id: (this.contacts.length += 1),
+    const newContact: CreatedContactResponse = {
+      id: 1,
       ...contact,
     };
-    return Promise.resolve(response);
+    console.log('LA', this.contacts);
+
+    this.contacts.push(newContact);
+    return Promise.resolve(newContact);
   }
 }
