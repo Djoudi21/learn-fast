@@ -3,20 +3,29 @@ import {Settings} from '../screens/Settings';
 import React from 'react';
 import {ContactStackNavigator} from './ContactStack';
 import {ConversationStackNavigator} from './ConversationStack';
+import {TheIconSettings} from '../components/icons/TheIconSettings';
 
 export function TabsStack() {
   const Tab = createBottomTabNavigator();
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: () => {
+          console.log(route);
+          if (route.name === 'Contacts') {
+            return <TheIconSettings />;
+          }
+        },
+      })}>
       <Tab.Screen
-        name="ContactStackNavigator"
+        name="Contacts"
         component={ContactStackNavigator}
         options={{
           headerShown: false,
         }}
       />
       <Tab.Screen
-        name="ConversationStackNavigator"
+        name="Conversations"
         component={ConversationStackNavigator}
         options={{
           headerShown: false,

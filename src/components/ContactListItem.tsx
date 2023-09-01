@@ -1,4 +1,4 @@
-import {Pressable, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {CreatedContactResponse} from '../use-cases/createContactUseCase/type';
 
@@ -10,7 +10,7 @@ export function ContactListItem({contact, navigation}: Props) {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('ContactStackNavigator', {
+        navigation.navigate('Contacts', {
           screen: 'ContactDetails',
         });
       }}>

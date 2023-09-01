@@ -27,7 +27,7 @@ export function Contacts({navigation}: Props) {
           <TouchableOpacity
             key={'tutu'}
             onPress={() => {
-              navigation.navigate('ContactStackNavigator', {
+              navigation.navigate('Contacts', {
                 screen: 'AddContact',
               });
             }}>

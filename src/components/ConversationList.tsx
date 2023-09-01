@@ -22,7 +22,7 @@ export function ConversationList({conversations, navigation, button}: Props) {
           <TouchableOpacity
             key={conversation.id}
             onPress={() => {
-              navigation.navigate('ConversationStackNavigator', {
+              navigation.navigate('Conversations', {
                 screen: 'ConversationDetails',
               });
             }}>

@@ -10,7 +10,7 @@ export function ContactStackNavigator() {
   return (
     <ContactStack.Navigator>
       <ContactStack.Group>
-        <ContactStack.Screen name="Contacts" component={Contacts} />
+        <ContactStack.Screen name="ContactsScreen" component={Contacts} />
         <ContactStack.Screen name="ContactDetails" component={ContactDetails} />
         <ContactStack.Screen name="AddContact" component={AddContact} />
       </ContactStack.Group>

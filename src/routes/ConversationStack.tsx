@@ -11,7 +11,7 @@ export function ConversationStackNavigator() {
     <ConversationStack.Navigator>
       <ConversationStack.Group>
         <ConversationStack.Screen
-          name="Conversations"
+          name="ConversationsScreen"
           component={Conversations}
         />
         <ConversationStack.Screen

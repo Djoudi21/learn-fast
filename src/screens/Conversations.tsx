@@ -25,7 +25,7 @@ export function Conversations({navigation}: Props) {
         button={
           <Pressable
             onPress={() => {
-              navigation.navigate('ConversationStackNavigator', {
+              navigation.navigate('Conversations', {
                 screen: 'AddConversation',
               });
             }}>
