@@ -21,6 +21,7 @@ export function Register({navigation}: any) {
   const borderStyleEmail = () => {
     return auth.isEmailFocused ? 'border-2 border-solid border-[#212121]' : '';
   };
+
   return (
     <SafeAreaView className="bg-[#F5F5F5]">
       <View className="m-4">
@@ -34,6 +35,7 @@ export function Register({navigation}: any) {
           onChangeText={auth.setEmail}
           value={auth.email}
           className={'w-full'}
+          errorMessage={auth.emailErrorMessage}
           containerStyle={`${borderStyleEmail()}`}
         />
 
@@ -50,6 +52,7 @@ export function Register({navigation}: any) {
           value={auth.password}
           secureTextEntry={auth.iSecureTextEntry}
           className={'w-11/12 h-full'}
+          errorMessage={auth.passwordErrorMessage}
           containerStyle={`${borderStylePassword()}`}
         />
 

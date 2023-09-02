@@ -21,10 +21,11 @@ export const BaseTextInput = forwardRef<TextInput, Props>(
       renderIcon,
       handlePressIcon,
       isInputValid,
-      errorMessage = '',
+      errorMessage,
       containerStyle,
       ...rest
     } = props;
+
     return (
       <View>
         <View
@@ -34,7 +35,7 @@ export const BaseTextInput = forwardRef<TextInput, Props>(
         </View>
         {!isInputValid && (
           <View>
-            <Text>{errorMessage}</Text>
+            <Text className={'text-error ml-2 mt-2 mb-4'}>{errorMessage}</Text>
           </View>
         )}
       </View>

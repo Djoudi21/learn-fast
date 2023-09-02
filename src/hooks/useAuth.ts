@@ -1,11 +1,7 @@
 import {useRef, useState} from 'react';
-// import {LoginUseCase} from '../use-cases/loginUseCase/loginUseCase';
-// import {InMemoryAuthRepository} from '../repositories/inMemoryAuthRepository';
 import {useDispatch} from 'react-redux';
 // import {setTokens} from '../store/auth/authSlice';
 import {register} from '../store/auth/register';
-import {User} from '../use-cases/loginUseCase/types';
-import {TextInput} from 'react-native';
 
 export default function useAuth() {
   const [email, setEmail] = useState('');
@@ -20,9 +16,6 @@ export default function useAuth() {
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const dispatch = useDispatch();
-  // const userRepository = new InMemoryAuthRepository();
-  // const loginUseCase = new LoginUseCase(userRepository);
-  // const registerUseCase = new RegisterUseCase(userRepository);
   const emailTextInputRef = useRef(null);
   const passwordTextInputRef = useRef(null);
   // async function handleLogin(navigation: any) {
@@ -61,36 +54,21 @@ export default function useAuth() {
   // }
 
   async function handleRegister(navigation: any) {
-    // if (emailTextInputRef.current) {
-    //   // @ts-ignore
-    //   emailTextInputRef.current.blur();
-    // }
-    //
-    // if (passwordTextInputRef.current) {
-    //   // @ts-ignore
-    //   passwordTextInputRef.current.blur();
-    // }
+    emailValidation();
+    passwordValidation();
+    if (!isEmailValid || !isPasswordValid) {
+      return;
+    }
 
-    // emailValidation();
-    // passwordValidation();
-    // if (!isEmailValid || !isPasswordValid) {
-    //   return;
-    // }
-    const credentials = {
+    const user = {
       email,
       password,
     };
     try {
-      console.log(credentials);
-
-      // await registerUseCase.register(credentials);
-      // const res = await loginUseCase.login(credentials);
-      // if (!res.tokens) {
-      //   return null;
-      // }
-      // const tokens = res.tokens;
-      dispatch(register(credentials as User));
-      // navigation.push('Tab');
+      const res = dispatch(register(user));
+      res.status === 201
+        ? navigation.push('Tab')
+        : setSubmissionErrorMessage(res.message);
     } catch (e) {
       // @ts-ignore
       const errorMessage = setSubmissionErrorMessage(e.response.data.message);
@@ -98,29 +76,28 @@ export default function useAuth() {
     }
   }
 
-  // function emailValidation() {
-  //   if (!email.length) {
-  //     setIsEmailValid(false);
-  //     setEmailErrorMessage('Please enter an email');
-  //     return;
-  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-  //     setIsEmailValid(false);
-  //     setEmailErrorMessage('Email is not valid');
-  //     return;
-  //   } else {
-  //     setIsEmailValid(true);
-  //   }
-  // }
+  function emailValidation() {
+    if (!email.length) {
+      setIsEmailValid(false);
+      setEmailErrorMessage('Please enter an email');
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      setIsEmailValid(false);
+      setEmailErrorMessage('Email is not valid');
+    } else {
+      setEmailErrorMessage('');
+      setIsEmailValid(true);
+    }
+  }
 
-  // function passwordValidation() {
-  //   if (!password.length) {
-  //     setIsPasswordValid(false);
-  //     setPasswordErrorMessage('Please enter a paswword');
-  //     return;
-  //   } else {
-  //     setIsPasswordValid(true);
-  //   }
-  // }
+  function passwordValidation() {
+    if (!password.length) {
+      setIsPasswordValid(false);
+      setPasswordErrorMessage('Please enter a paswword');
+    } else {
+      setPasswordErrorMessage('');
+      setIsPasswordValid(true);
+    }
+  }
 
   function setSubmissionErrorMessage(message: string): string {
     switch (message) {

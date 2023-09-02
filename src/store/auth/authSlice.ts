@@ -29,15 +29,15 @@ export const authSlice = createSlice({
     // });
     builder.addCase(register.fulfilled, (state, action) => {
       // state.tokens = action.payload;
-      console.log(action.payload);
+      // console.log('fulfilled', action);
     });
     builder.addCase(register.pending, (state, action) => {
       // state.tokens = action.payload;
-      console.log(action.payload);
+      // console.log('pending', action);
     });
     builder.addCase(register.rejected, (state, action) => {
       // state.tokens = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
     });
   },
 });
