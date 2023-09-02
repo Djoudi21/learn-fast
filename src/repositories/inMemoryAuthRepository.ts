@@ -33,6 +33,10 @@ export class InMemoryAuthRepository implements AuthRepository {
     return Promise.resolve(response);
   }
 
+  logout(): Promise<any> {
+    return Promise.resolve();
+  }
+
   register(user: User): Promise<CreatedUserResponse | ErrorResponse> {
     const isUser = this.users.find(el => el.email === user.email);
     if (isUser) {

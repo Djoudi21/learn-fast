@@ -9,5 +9,7 @@ export interface AuthRepository {
 
   login(user: User): Promise<any>;
 
+  logout(): Promise<any>;
+
   register(user: User): Promise<CreatedUserResponse | ErrorResponse>;
 }

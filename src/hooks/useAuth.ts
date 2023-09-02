@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 // import {setTokens} from '../store/auth/authSlice';
 import {register} from '../store/auth/register';
 import {store} from '../store';
+import {login} from '../store/auth/login';
 
 export default function useAuth() {
   const [email, setEmail] = useState('');
@@ -25,18 +26,15 @@ export default function useAuth() {
     if (!isEmailValid || !isPasswordValid) {
       return;
     }
-    const credentials = {
+    const user = {
       email,
       password,
     };
     try {
-      const res = await loginUseCase.login(credentials);
-      if (!res.tokens) {
-        return null;
-      }
-      const tokens = res.tokens;
-      dispatch(setTokens(tokens));
-      navigation.push('Tab');
+      dispatch(login(user));
+      return store.getState().auth.tokens.accessToken?.length
+        ? navigation.push('Tab')
+        : null;
     } catch (e) {
       // @ts-ignore
       const errorMessage = setSubmissionErrorMessage(e.response.data.message);
@@ -57,7 +55,7 @@ export default function useAuth() {
     };
     try {
       dispatch(register(user));
-      return store.getState().auth.tokens.accessToken.length
+      return store.getState().auth.tokens.accessToken?.length
         ? navigation.push('Tab')
         : null;
     } catch (e) {

@@ -1,7 +1,8 @@
-import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
+import {Pressable, SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {ContactList} from '../components/ContactList';
 import {CreatedContactResponse} from '../use-cases/createContactUseCase/type';
+import {persistor} from '../store';
 
 type Props = {
   navigation: any;
@@ -36,6 +37,13 @@ export function Contacts({navigation}: Props) {
         }
         logoTitle={<Text>TITLE</Text>}
       />
+      <Pressable
+        onPress={async () => {
+          await persistor.purge();
+          navigation.push('Login');
+        }}>
+        <Text>LOG OUT</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }

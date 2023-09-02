@@ -1,8 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
-// import {logout} from './logout';
 import {register} from './register';
-import {CreatedUserResponse} from '../../use-cases/registerUseCase/types';
-// import {login} from './login';
+import {login} from './login';
+import {logout} from './logout';
+import {PURGE} from 'redux-persist';
 
 type InitialState = {
   entity: {};
@@ -24,25 +24,22 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
+    builder.addCase(PURGE, () => {
+      return initialState;
+    });
     // builder.addCase(logout.fulfilled, (state, action) => {
     //   state.tokens.accessToken = action.payload;
     // });
-    // builder.addCase(login.fulfilled, (state, action) => {
-    //   state.tokens.accessToken = action.payload;
-    // });
+    builder.addCase(login.fulfilled, (state, action) => {
+      if (action.payload.data.tokens) {
+        state.tokens = {...action.payload.data.tokens};
+      }
+    });
     builder.addCase(register.fulfilled, (state, action) => {
       state.entity = {...action.payload.data};
       if (action.payload.data.tokens) {
         state.tokens = {...action.payload.data.tokens};
       }
-    });
-    builder.addCase(register.pending, (state, action) => {
-      // state.tokens = action.payload;
-      // console.log('pending', action);
-    });
-    builder.addCase(register.rejected, (state, action) => {
-      // state.tokens = action.payload;
-      // console.log(action.payload);
     });
   },
 });
