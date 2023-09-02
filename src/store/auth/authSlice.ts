@@ -31,6 +31,14 @@ export const authSlice = createSlice({
       // state.tokens = action.payload;
       console.log(action.payload);
     });
+    builder.addCase(register.pending, (state, action) => {
+      // state.tokens = action.payload;
+      console.log(action.payload);
+    });
+    builder.addCase(register.rejected, (state, action) => {
+      // state.tokens = action.payload;
+      console.log(action.payload);
+    });
   },
 });
 

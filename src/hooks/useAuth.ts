@@ -4,6 +4,7 @@ import {useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 // import {setTokens} from '../store/auth/authSlice';
 import {register} from '../store/auth/register';
+import {User} from '../use-cases/loginUseCase/types';
 
 export default function useAuth() {
   const [email, setEmail] = useState('');
@@ -79,14 +80,16 @@ export default function useAuth() {
       password,
     };
     try {
+      console.log(credentials);
+
       // await registerUseCase.register(credentials);
       // const res = await loginUseCase.login(credentials);
       // if (!res.tokens) {
       //   return null;
       // }
       // const tokens = res.tokens;
-      dispatch(register(credentials));
-      navigation.push('Tab');
+      dispatch(register(credentials as User));
+      // navigation.push('Tab');
     } catch (e) {
       // @ts-ignore
       const errorMessage = setSubmissionErrorMessage(e.response.data.message);
