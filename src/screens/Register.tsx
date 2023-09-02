@@ -3,56 +3,54 @@ import React, {useState} from 'react';
 import useAuth from '../hooks/useAuth';
 import {TheIconEyeOpened} from '../components/icons/TheIconEyeOpened';
 import {TheIconEyeClosed} from '../components/icons/TheIconEyeClosed';
+import {BaseTextInput} from '../components/atomics/BaseTextInput';
 
 export function Register({navigation}: any) {
   const auth = useAuth();
 
   const [iSecureTextEntry, setIsSecureTextEntry] = useState(true);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isEmailFocused, setIsEmailFocused] = useState(false);
   function renderIconEye() {
     return iSecureTextEntry ? <TheIconEyeClosed /> : <TheIconEyeOpened />;
   }
+
+  const borderStylePassword = () => {
+    return isPasswordFocused ? 'border-2 border-solid border-[#212121]' : '';
+  };
+
+  const borderStyleEmail = () => {
+    return isEmailFocused ? 'border-2 border-solid border-[#212121]' : '';
+  };
   return (
     <SafeAreaView className="bg-[#F5F5F5]">
       <View className="m-4">
         <Text className="text-xl text-[#03074F] my-6">Inscrivez-vous</Text>
-        <View className="mb-10">
-          <TextInput
-            ref={auth.emailTextInputRef}
-            placeholder="Email"
-            onChangeText={auth.setEmail}
-            value={auth.email}
-            className="border-2 border-solid border-[#E9E9EE] rounded-3xl p-4"
-          />
-          {!auth.isEmailValid && (
-            <View>
-              <Text>{auth.emailErrorMessage}</Text>
-            </View>
-          )}
-        </View>
-        <View className="mb-10">
-          <View className="border-2 border-solid border-[#E9E9EE] rounded-3xl p-4 flex flex-row">
-            <TextInput
-              ref={auth.passwordTextInputRef}
-              // onBlur={() => auth.passwordValidation()}
-              placeholder="Password"
-              onFocus={auth.handleFocusPasswordInput}
-              onChangeText={auth.setPassword}
-              value={auth.password}
-              secureTextEntry={iSecureTextEntry}
-              className="w-11/12"
-            />
-            <Pressable onPress={() => setIsSecureTextEntry(!iSecureTextEntry)}>
-              {renderIconEye()}
-            </Pressable>
-          </View>
 
-          {!auth.isPasswordValid && (
-            <View>
-              <Text>{auth.passwordErrorMessage}</Text>
-            </View>
-          )}
-        </View>
+        <BaseTextInput
+          ref={auth.emailTextInputRef}
+          onFocus={() => setIsEmailFocused(true)}
+          onBlur={() => setIsEmailFocused(false)}
+          placeholder="Email"
+          onChangeText={auth.setEmail}
+          value={auth.email}
+          className={'w-full'}
+          containerStyle={`${borderStyleEmail()}`}
+        />
 
+        <BaseTextInput
+          ref={auth.passwordTextInputRef}
+          onFocus={() => setIsPasswordFocused(true)}
+          onBlur={() => setIsPasswordFocused(false)}
+          placeholder="Password"
+          handlePressIcon={() => setIsSecureTextEntry(!iSecureTextEntry)}
+          renderIcon={renderIconEye}
+          onChangeText={auth.setPassword}
+          value={auth.password}
+          secureTextEntry={iSecureTextEntry}
+          className={'w-11/12 h-full'}
+          containerStyle={`${borderStylePassword()}`}
+        />
         <Pressable
           className="border-2 bg-[#7054FF] border-solid border-[#E9E9EE] rounded-3xl p-4"
           onPress={() => auth.handleRegister(navigation)}>
