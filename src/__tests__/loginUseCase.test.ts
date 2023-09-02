@@ -3,7 +3,7 @@ import {AuthRepository} from '../repositories/interfaces/AuthRepository';
 import {LoginUseCase} from '../use-cases/loginUseCase/loginUseCase';
 
 describe('login use case', () => {
-  let authRepository: AuthRepository;
+  let userRepository: AuthRepository;
   let loginUseCase: LoginUseCase;
   beforeEach(() => {
     authRepository = new InMemoryAuthRepository();

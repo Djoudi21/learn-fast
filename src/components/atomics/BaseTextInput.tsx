@@ -1,11 +1,24 @@
 import {Pressable, Text, TextInput, View} from 'react-native';
-import React, {ReactNode} from 'react';
+import React, {
+  Dispatch,
+  MutableRefObject,
+  ReactNode,
+  SetStateAction,
+} from 'react';
 
 type Props = {
   renderIcon?: () => ReactNode;
   errorMessage?: string;
   isInputValid?: boolean;
   handlePressIcon?: () => void;
+  ref?: MutableRefObject<null>;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  placeholder?: string;
+  onChangeText?: Dispatch<SetStateAction<string>>;
+  value?: string;
+  secureTextEntry?: boolean;
+  className?: string;
   containerStyle?: string;
 };
 export function BaseTextInput(props: Props) {

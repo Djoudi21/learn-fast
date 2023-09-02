@@ -1,10 +1,9 @@
-import React, {useRef, useState} from 'react';
-import {LoginUseCase} from '../use-cases/loginUseCase/loginUseCase';
-import {RegisterUseCase} from '../use-cases/registerUseCase/registerUseCase';
-import {InMemoryAuthRepository} from '../repositories/inMemoryAuthRepository';
+import {useRef, useState} from 'react';
+// import {LoginUseCase} from '../use-cases/loginUseCase/loginUseCase';
+// import {InMemoryAuthRepository} from '../repositories/inMemoryAuthRepository';
 import {useDispatch} from 'react-redux';
-import {setTokens} from '../store/auth/authSlice';
-import {TheIconEyeOpened} from '../components/icons/TheIconEyeOpened';
+// import {setTokens} from '../store/auth/authSlice';
+import {register} from '../store/auth/register';
 
 export default function useAuth() {
   const [email, setEmail] = useState('');
@@ -15,10 +14,13 @@ export default function useAuth() {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [formSubmissionErrorMessage, setFormSubmissionErrorMessage] =
     useState('');
+  const [iSecureTextEntry, setIsSecureTextEntry] = useState(true);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isEmailFocused, setIsEmailFocused] = useState(false);
   const dispatch = useDispatch();
-  const userRepository = new InMemoryAuthRepository();
-  const loginUseCase = new LoginUseCase(userRepository);
-  const registerUseCase = new RegisterUseCase(userRepository);
+  // const userRepository = new InMemoryAuthRepository();
+  // const loginUseCase = new LoginUseCase(userRepository);
+  // const registerUseCase = new RegisterUseCase(userRepository);
   const emailTextInputRef = useRef(null);
   const passwordTextInputRef = useRef(null);
   // async function handleLogin(navigation: any) {
@@ -69,21 +71,21 @@ export default function useAuth() {
 
     // emailValidation();
     // passwordValidation();
-    if (!isEmailValid || !isPasswordValid) {
-      return;
-    }
+    // if (!isEmailValid || !isPasswordValid) {
+    //   return;
+    // }
     const credentials = {
       email,
       password,
     };
     try {
-      await registerUseCase.register(credentials);
-      const res = await loginUseCase.login(credentials);
-      if (!res.tokens) {
-        return null;
-      }
-      const tokens = res.tokens;
-      dispatch(setTokens(tokens));
+      // await registerUseCase.register(credentials);
+      // const res = await loginUseCase.login(credentials);
+      // if (!res.tokens) {
+      //   return null;
+      // }
+      // const tokens = res.tokens;
+      dispatch(register(credentials));
       navigation.push('Tab');
     } catch (e) {
       // @ts-ignore
@@ -146,7 +148,9 @@ export default function useAuth() {
     handleFocusPasswordInput,
     // handleFocusEmailInput,
     emailErrorMessage,
+    setEmailErrorMessage,
     passwordErrorMessage,
+    setPasswordErrorMessage,
     emailTextInputRef,
     passwordTextInputRef,
     email,
@@ -154,7 +158,15 @@ export default function useAuth() {
     password,
     setPassword,
     isEmailValid,
+    setIsEmailValid,
     isPasswordValid,
+    setIsPasswordValid,
+    iSecureTextEntry,
+    setIsSecureTextEntry,
+    isPasswordFocused,
+    setIsPasswordFocused,
+    isEmailFocused,
+    setIsEmailFocused,
     formSubmissionErrorMessage,
   };
 }
