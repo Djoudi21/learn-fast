@@ -2,6 +2,7 @@ import {useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 // import {setTokens} from '../store/auth/authSlice';
 import {register} from '../store/auth/register';
+import {store} from '../store';
 
 export default function useAuth() {
   const [email, setEmail] = useState('');
@@ -18,40 +19,30 @@ export default function useAuth() {
   const dispatch = useDispatch();
   const emailTextInputRef = useRef(null);
   const passwordTextInputRef = useRef(null);
-  // async function handleLogin(navigation: any) {
-  //   // if (emailTextInputRef.current) {
-  //   //   // @ts-ignore
-  //   //   emailTextInputRef.current.blur();
-  //   // }
-  //   //
-  //   // if (passwordTextInputRef.current) {
-  //   //   // @ts-ignore
-  //   //   passwordTextInputRef.current.blur();
-  //   // }
-  //
-  //   // emailValidation();
-  //   // passwordValidation();
-  //   if (!isEmailValid || !isPasswordValid) {
-  //     return;
-  //   }
-  //   const credentials = {
-  //     email,
-  //     password,
-  //   };
-  //   try {
-  //     const res = await loginUseCase.login(credentials);
-  //     if (!res.tokens) {
-  //       return null;
-  //     }
-  //     const tokens = res.tokens;
-  //     dispatch(setTokens(tokens));
-  //     navigation.push('Tab');
-  //   } catch (e) {
-  //     // @ts-ignore
-  //     const errorMessage = setSubmissionErrorMessage(e.response.data.message);
-  //     setFormSubmissionErrorMessage(errorMessage);
-  //   }
-  // }
+  async function handleLogin(navigation: any) {
+    emailValidation();
+    passwordValidation();
+    if (!isEmailValid || !isPasswordValid) {
+      return;
+    }
+    const credentials = {
+      email,
+      password,
+    };
+    try {
+      const res = await loginUseCase.login(credentials);
+      if (!res.tokens) {
+        return null;
+      }
+      const tokens = res.tokens;
+      dispatch(setTokens(tokens));
+      navigation.push('Tab');
+    } catch (e) {
+      // @ts-ignore
+      const errorMessage = setSubmissionErrorMessage(e.response.data.message);
+      setFormSubmissionErrorMessage(errorMessage);
+    }
+  }
 
   async function handleRegister(navigation: any) {
     emailValidation();
@@ -65,10 +56,10 @@ export default function useAuth() {
       password,
     };
     try {
-      const res = dispatch(register(user));
-      res.status === 201
+      dispatch(register(user));
+      return store.getState().auth.tokens.accessToken.length
         ? navigation.push('Tab')
-        : setSubmissionErrorMessage(res.message);
+        : null;
     } catch (e) {
       // @ts-ignore
       const errorMessage = setSubmissionErrorMessage(e.response.data.message);
@@ -121,7 +112,7 @@ export default function useAuth() {
   }
 
   return {
-    // handleLogin,
+    handleLogin,
     handleRegister,
     // emailValidation,
     // passwordValidation,

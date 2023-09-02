@@ -44,8 +44,14 @@ export class InMemoryAuthRepository implements AuthRepository {
     };
     this.users.push(userWithId);
     const response: CreatedUserResponse = {
-      email: userWithId.email,
-      id: userWithId.id,
+      status: 201,
+      data: {
+        ...userWithId,
+        tokens: {
+          accessToken: `${userWithId.email}`,
+          refreshToken: '',
+        },
+      },
     };
     return Promise.resolve(response);
   }

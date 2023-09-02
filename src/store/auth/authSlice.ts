@@ -1,16 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit';
 // import {logout} from './logout';
 import {register} from './register';
+import {CreatedUserResponse} from '../../use-cases/registerUseCase/types';
 // import {login} from './login';
 
-type initialState = {
+type InitialState = {
+  entity: {};
   tokens: {
     accessToken: string | null;
     refreshToken: string | null;
   };
 };
 
-const initialState = {
+const initialState: InitialState = {
+  entity: {},
   tokens: {
     accessToken: null,
     refreshToken: null,
@@ -18,7 +21,7 @@ const initialState = {
 };
 export const authSlice = createSlice({
   name: 'user',
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: builder => {
     // builder.addCase(logout.fulfilled, (state, action) => {
@@ -28,8 +31,10 @@ export const authSlice = createSlice({
     //   state.tokens.accessToken = action.payload;
     // });
     builder.addCase(register.fulfilled, (state, action) => {
-      // state.tokens = action.payload;
-      // console.log('fulfilled', action);
+      state.entity = {...action.payload.data};
+      if (action.payload.data.tokens) {
+        state.tokens = {...action.payload.data.tokens};
+      }
     });
     builder.addCase(register.pending, (state, action) => {
       // state.tokens = action.payload;
@@ -41,8 +46,5 @@ export const authSlice = createSlice({
     });
   },
 });
-
-// Action creators are generated for each case reducer function
-// export const {setTokens} = authSlice.actions;
 
 export default authSlice.reducer;

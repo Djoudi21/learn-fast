@@ -53,7 +53,7 @@ export function Login({navigation}: any) {
         />
         <Pressable
           className="border-2 bg-[#7054FF] border-solid border-[#E9E9EE] rounded-3xl p-4"
-          onPress={() => auth.handleRegister(navigation)}>
+          onPress={() => auth.handleLogin(navigation)}>
           <Text className="text-center text-[#E3E2FD]">Validez</Text>
         </Pressable>
 

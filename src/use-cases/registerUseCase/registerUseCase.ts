@@ -12,6 +12,7 @@ export class RegisterUseCase {
     if (!user.email.includes('@')) {
       throw new Error('wrong email');
     }
+
     return await this.authRepository.register(user);
   }
 }
