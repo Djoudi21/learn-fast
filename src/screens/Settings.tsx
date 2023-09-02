@@ -1,9 +1,14 @@
-import {SafeAreaView, Text} from 'react-native';
+import {Pressable, SafeAreaView, Text} from 'react-native';
 import React from 'react';
-export function Settings() {
+export function Settings({navigation}: any) {
   return (
     <SafeAreaView>
-      <Text>SETTINGS</Text>
+      <Pressable
+        onPress={async () => {
+          navigation.push('Login');
+        }}>
+        <Text>LOG OUT</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
