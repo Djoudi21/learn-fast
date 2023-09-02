@@ -10,12 +10,12 @@ const RootStack = createNativeStackNavigator();
 
 export function RootStackRouter() {
   const [initialRoute, setInitialRoute] = useState<string | null>(null);
-  const tokens = useSelector((state: any) => state.user.tokens);
+  const accessToken = useSelector((state: any) => state.auth.accessToken);
 
   useEffect(() => {
     async function checkTokensAndSetNavigation() {
       try {
-        if (tokens.accessToken !== null) {
+        if (accessToken.accessToken !== null) {
           setInitialRoute('Tab');
         } else {
           setInitialRoute('Login');
@@ -26,8 +26,6 @@ export function RootStackRouter() {
     }
 
     checkTokensAndSetNavigation().then();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return initialRoute !== null ? (

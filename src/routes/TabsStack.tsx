@@ -11,7 +11,6 @@ export function TabsStack() {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: () => {
-          console.log(route);
           if (route.name === 'Contacts') {
             return <TheIconSettings />;
           }
