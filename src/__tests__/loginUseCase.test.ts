@@ -1,13 +1,13 @@
 import {InMemoryAuthRepository} from '../repositories/inMemoryAuthRepository';
-import {UserRepository} from '../repositories/interfaces/UserRepository';
+import {AuthRepository} from '../repositories/interfaces/AuthRepository';
 import {LoginUseCase} from '../use-cases/loginUseCase/loginUseCase';
 
 describe('login use case', () => {
-  let userRepository: UserRepository;
+  let authRepository: AuthRepository;
   let loginUseCase: LoginUseCase;
   beforeEach(() => {
-    userRepository = new InMemoryAuthRepository();
-    loginUseCase = new LoginUseCase(userRepository);
+    authRepository = new InMemoryAuthRepository();
+    loginUseCase = new LoginUseCase(authRepository);
   });
   it('should login a user with valid credentials', async () => {
     // ARRANGE
@@ -15,7 +15,7 @@ describe('login use case', () => {
       email: 'valid@email.com',
       password: 'validpassword',
     };
-    userRepository.users.push(user);
+    authRepository.users.push(user);
     // ACT
     const response = await loginUseCase.login(user);
     const tokens = response.tokens;
@@ -31,7 +31,7 @@ describe('login use case', () => {
       email: 'valid@email.com',
       password: 'validpassword',
     };
-    userRepository.users.push(validUser);
+    authRepository.users.push(validUser);
     const invalidUser = {
       email: 'invalid email',
       password: 'validpassword',
@@ -52,7 +52,7 @@ describe('login use case', () => {
       email: 'valid@email.com',
       password: 'validpassword',
     };
-    userRepository.users.push(validUser);
+    authRepository.users.push(validUser);
     const invalidUser = {
       email: 'valid@email.com',
       password: 'invalidpassword',

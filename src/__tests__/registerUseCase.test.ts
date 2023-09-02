@@ -2,11 +2,11 @@ import {RegisterUseCase} from '../use-cases/registerUseCase/registerUseCase';
 import {InMemoryAuthRepository} from '../repositories/inMemoryAuthRepository';
 
 describe('register use case', () => {
-  let userRepository: InMemoryAuthRepository;
+  let authRepository: InMemoryAuthRepository;
   let registerUseCase: RegisterUseCase;
   beforeEach(() => {
-    userRepository = new InMemoryAuthRepository();
-    registerUseCase = new RegisterUseCase(userRepository);
+    authRepository = new InMemoryAuthRepository();
+    registerUseCase = new RegisterUseCase(authRepository);
   });
   it('should register a new user', async () => {
     const newUser = {
@@ -15,7 +15,7 @@ describe('register use case', () => {
     };
     const createdUser = await registerUseCase.register(newUser);
     expect(createdUser).toHaveProperty('id');
-    expect(userRepository.users).toHaveLength(1);
+    expect(authRepository.users).toHaveLength(1);
   });
   it('should not register a user with invalid email', async () => {
     const userWithInvalidEmail = {
@@ -27,7 +27,7 @@ describe('register use case', () => {
     } catch (error) {
       expect((error as Error).message).toBe('wrong email');
       expect(error).toBeInstanceOf(Error);
-      expect(userRepository.users).toHaveLength(0);
+      expect(authRepository.users).toHaveLength(0);
     }
   });
   it('should not register an existing user', async () => {
@@ -35,7 +35,7 @@ describe('register use case', () => {
       email: 'existing@user.com',
       password: 'password',
     };
-    userRepository.users.push(existingUser);
+    authRepository.users.push(existingUser);
     const createUser = {
       email: 'existing@user.com',
       password: 'password',
@@ -45,7 +45,7 @@ describe('register use case', () => {
     } catch (error) {
       expect((error as Error).message).toBe('User already exists');
       expect(error).toBeInstanceOf(Error);
-      expect(userRepository.users).toHaveLength(1);
+      expect(authRepository.users).toHaveLength(1);
     }
   });
 });

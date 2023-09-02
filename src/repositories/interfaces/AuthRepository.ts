@@ -4,7 +4,7 @@ import {
   ErrorResponse,
 } from '../../use-cases/registerUseCase/types';
 
-export interface UserRepository {
+export interface AuthRepository {
   users: User[];
 
   login(user: User): Promise<any>;

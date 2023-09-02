@@ -1,17 +1,17 @@
 import {User} from '../loginUseCase/types';
-import {UserRepository} from '../../repositories/interfaces/UserRepository';
+import {AuthRepository} from '../../repositories/interfaces/AuthRepository';
 
 export class RegisterUseCase {
-  private userRepository: UserRepository;
+  private authRepository: AuthRepository;
 
-  constructor(userRepository: UserRepository) {
-    this.userRepository = userRepository;
+  constructor(authRepository: AuthRepository) {
+    this.authRepository = authRepository;
   }
 
   async register(user: User) {
     if (!user.email.includes('@')) {
       throw new Error('wrong email');
     }
-    return await this.userRepository.register(user);
+    return await this.authRepository.register(user);
   }
 }

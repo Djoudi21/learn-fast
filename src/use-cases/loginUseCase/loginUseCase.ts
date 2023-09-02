@@ -1,14 +1,14 @@
-import {UserRepository} from '../../repositories/interfaces/UserRepository';
+import {AuthRepository} from '../../repositories/interfaces/AuthRepository';
 import {User} from './types';
 
 export class LoginUseCase {
-  private userRepository: UserRepository;
+  private authRepository: AuthRepository;
 
-  constructor(userRepository: UserRepository) {
-    this.userRepository = userRepository;
+  constructor(authRepository: AuthRepository) {
+    this.authRepository = authRepository;
   }
 
   async login(user: User) {
-    return this.userRepository.login(user);
+    return this.authRepository.login(user);
   }
 }

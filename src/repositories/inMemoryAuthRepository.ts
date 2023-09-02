@@ -1,11 +1,11 @@
-import {UserRepository} from './interfaces/UserRepository';
+import {AuthRepository} from './interfaces/AuthRepository';
 import {User} from '../use-cases/loginUseCase/types';
 import {
   CreatedUserResponse,
   ErrorResponse,
 } from '../use-cases/registerUseCase/types';
 
-export class InMemoryAuthRepository implements UserRepository {
+export class InMemoryAuthRepository implements AuthRepository {
   users: User[] = [];
 
   login(user: User): Promise<any> {
