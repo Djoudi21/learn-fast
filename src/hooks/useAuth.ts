@@ -21,40 +21,40 @@ export default function useAuth() {
   const registerUseCase = new RegisterUseCase(userRepository);
   const emailTextInputRef = useRef(null);
   const passwordTextInputRef = useRef(null);
-  async function handleLogin(navigation: any) {
-    // if (emailTextInputRef.current) {
-    //   // @ts-ignore
-    //   emailTextInputRef.current.blur();
-    // }
-    //
-    // if (passwordTextInputRef.current) {
-    //   // @ts-ignore
-    //   passwordTextInputRef.current.blur();
-    // }
-
-    // emailValidation();
-    // passwordValidation();
-    if (!isEmailValid || !isPasswordValid) {
-      return;
-    }
-    const credentials = {
-      email,
-      password,
-    };
-    try {
-      const res = await loginUseCase.login(credentials);
-      if (!res.tokens) {
-        return null;
-      }
-      const tokens = res.tokens;
-      dispatch(setTokens(tokens));
-      navigation.push('Tab');
-    } catch (e) {
-      // @ts-ignore
-      const errorMessage = setSubmissionErrorMessage(e.response.data.message);
-      setFormSubmissionErrorMessage(errorMessage);
-    }
-  }
+  // async function handleLogin(navigation: any) {
+  //   // if (emailTextInputRef.current) {
+  //   //   // @ts-ignore
+  //   //   emailTextInputRef.current.blur();
+  //   // }
+  //   //
+  //   // if (passwordTextInputRef.current) {
+  //   //   // @ts-ignore
+  //   //   passwordTextInputRef.current.blur();
+  //   // }
+  //
+  //   // emailValidation();
+  //   // passwordValidation();
+  //   if (!isEmailValid || !isPasswordValid) {
+  //     return;
+  //   }
+  //   const credentials = {
+  //     email,
+  //     password,
+  //   };
+  //   try {
+  //     const res = await loginUseCase.login(credentials);
+  //     if (!res.tokens) {
+  //       return null;
+  //     }
+  //     const tokens = res.tokens;
+  //     dispatch(setTokens(tokens));
+  //     navigation.push('Tab');
+  //   } catch (e) {
+  //     // @ts-ignore
+  //     const errorMessage = setSubmissionErrorMessage(e.response.data.message);
+  //     setFormSubmissionErrorMessage(errorMessage);
+  //   }
+  // }
 
   async function handleRegister(navigation: any) {
     // if (emailTextInputRef.current) {
@@ -138,7 +138,7 @@ export default function useAuth() {
   }
 
   return {
-    handleLogin,
+    // handleLogin,
     handleRegister,
     // emailValidation,
     // passwordValidation,
