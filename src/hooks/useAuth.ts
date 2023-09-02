@@ -5,6 +5,7 @@ import {useDispatch} from 'react-redux';
 // import {setTokens} from '../store/auth/authSlice';
 import {register} from '../store/auth/register';
 import {User} from '../use-cases/loginUseCase/types';
+import {TextInput} from 'react-native';
 
 export default function useAuth() {
   const [email, setEmail] = useState('');

@@ -1,18 +1,11 @@
 import {Pressable, Text, TextInput, View} from 'react-native';
-import React, {
-  Dispatch,
-  forwardRef,
-  MutableRefObject,
-  ReactNode,
-  SetStateAction,
-} from 'react';
+import React, {Dispatch, forwardRef, ReactNode, SetStateAction} from 'react';
 
 type Props = {
   renderIcon?: () => ReactNode;
   errorMessage?: string;
   isInputValid?: boolean;
   handlePressIcon?: () => void;
-  ref?: MutableRefObject<null>;
   onFocus?: () => void;
   onBlur?: () => void;
   placeholder?: string;
@@ -22,27 +15,29 @@ type Props = {
   className?: string;
   containerStyle?: string;
 };
-export const BaseTextInput = forwardRef((props: Props, ref) => {
-  const {
-    renderIcon,
-    handlePressIcon,
-    isInputValid,
-    errorMessage = '',
-    containerStyle,
-    ...rest
-  } = props;
-  return (
-    <View>
-      <View
-        className={`border-2 border-solid border-[#E9E9EE] rounded-3xl px-4 h-10 flex items-center justify-center flex-row ${containerStyle}`}>
-        <TextInput {...rest} />
-        <Pressable onPress={handlePressIcon}>{renderIcon?.()}</Pressable>
-      </View>
-      {!isInputValid && (
-        <View>
-          <Text>{errorMessage}</Text>
+export const BaseTextInput = forwardRef<TextInput, Props>(
+  (props: Props, ref) => {
+    const {
+      renderIcon,
+      handlePressIcon,
+      isInputValid,
+      errorMessage = '',
+      containerStyle,
+      ...rest
+    } = props;
+    return (
+      <View>
+        <View
+          className={`border-2 border-solid border-[#E9E9EE] rounded-3xl px-4 h-10 flex items-center justify-center flex-row ${containerStyle}`}>
+          <TextInput ref={ref} {...rest} />
+          <Pressable onPress={handlePressIcon}>{renderIcon?.()}</Pressable>
         </View>
-      )}
-    </View>
-  );
-});
+        {!isInputValid && (
+          <View>
+            <Text>{errorMessage}</Text>
+          </View>
+        )}
+      </View>
+    );
+  },
+);
