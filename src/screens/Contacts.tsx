@@ -37,13 +37,6 @@ export function Contacts({navigation}: Props) {
         }
         logoTitle={<Text>TITLE</Text>}
       />
-      <Pressable
-        onPress={async () => {
-          await persistor.purge();
-          navigation.push('Login');
-        }}>
-        <Text>LOG OUT</Text>
-      </Pressable>
     </SafeAreaView>
   );
 }
