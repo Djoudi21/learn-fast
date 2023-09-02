@@ -1,9 +1,9 @@
 import {useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
-// import {setTokens} from '../store/auth/authSlice';
 import {register} from '../store/auth/register';
 import {store} from '../store';
 import {login} from '../store/auth/login';
+import {ThunkDispatch} from '@reduxjs/toolkit';
 
 export default function useAuth() {
   const [email, setEmail] = useState('');
@@ -17,24 +17,29 @@ export default function useAuth() {
   const [iSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const emailTextInputRef = useRef(null);
   const passwordTextInputRef = useRef(null);
+
   async function handleLogin(navigation: any) {
     emailValidation();
     passwordValidation();
+
     if (!isEmailValid || !isPasswordValid) {
       return;
     }
+
     const user = {
       email,
       password,
     };
+
     try {
       dispatch(login(user));
-      return store.getState().auth.tokens.accessToken?.length
+      const accessToken = store.getState().auth.tokens.accessToken;
+      return accessToken?.length
         ? navigation.push('Tab')
-        : null;
+        : setFormSubmissionErrorMessage("Aucun utilisateur n'a été trouvé");
     } catch (e) {
       // @ts-ignore
       const errorMessage = setSubmissionErrorMessage(e.response.data.message);
@@ -55,9 +60,8 @@ export default function useAuth() {
     };
     try {
       dispatch(register(user));
-      return store.getState().auth.tokens.accessToken?.length
-        ? navigation.push('Tab')
-        : null;
+      dispatch(login(user));
+      navigation.push('Tab');
     } catch (e) {
       // @ts-ignore
       const errorMessage = setSubmissionErrorMessage(e.response.data.message);
@@ -88,24 +92,17 @@ export default function useAuth() {
     }
   }
 
-  function setSubmissionErrorMessage(message: string): string {
-    switch (message) {
-      default:
-        return "Aucun utilisateur n'a été trouvé";
-    }
-  }
-
   function handleRedirect(routeName: string, navigation: any) {
     navigation.push(routeName);
   }
 
-  // function handleFocusEmailInput() {
-  //   setEmail('');
-  //   setFormSubmissionErrorMessage('');
-  // }
+  function handleFocusEmailInput() {
+    setIsEmailFocused(true);
+    setFormSubmissionErrorMessage('');
+  }
 
   function handleFocusPasswordInput() {
-    setPassword('');
+    setIsPasswordFocused(true);
     setFormSubmissionErrorMessage('');
   }
 
@@ -116,7 +113,7 @@ export default function useAuth() {
     // passwordValidation,
     handleRedirect,
     handleFocusPasswordInput,
-    // handleFocusEmailInput,
+    handleFocusEmailInput,
     emailErrorMessage,
     setEmailErrorMessage,
     passwordErrorMessage,

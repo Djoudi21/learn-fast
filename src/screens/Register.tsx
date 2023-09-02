@@ -13,19 +13,17 @@ export function Register({navigation}: any) {
   }
 
   const borderStylePassword = () => {
-    return auth.isPasswordFocused
-      ? 'border-2 border-solid border-[#212121]'
-      : '';
+    return auth.isPasswordFocused ? 'border border-solid border-primary' : '';
   };
 
   const borderStyleEmail = () => {
-    return auth.isEmailFocused ? 'border-2 border-solid border-[#212121]' : '';
+    return auth.isEmailFocused ? 'border- border-solid border-primary' : '';
   };
 
   return (
-    <SafeAreaView className="bg-[#F5F5F5]">
+    <SafeAreaView className="bg-Whitesmoke">
       <View className="m-4">
-        <Text className="text-xl text-[#03074F] my-6">Inscrivez-vous</Text>
+        <Text className="text-xl text-midnightBlue my-6">Inscrivez-vous</Text>
 
         <BaseTextInput
           ref={auth.emailTextInputRef}
@@ -57,22 +55,23 @@ export function Register({navigation}: any) {
         />
 
         <Pressable
-          className="border-2 bg-[#7054FF] border-solid border-[#E9E9EE] rounded-3xl p-4"
+          className="border-2 bg-purple border-solid border-lavender rounded-3xl p-4"
           onPress={() => auth.handleRegister(navigation)}>
-          <Text className="text-center text-[#E3E2FD]">Validez</Text>
+          <Text className="text-center text-hanPurple">Validez</Text>
         </Pressable>
 
-        {auth.formSubmissionErrorMessage
+        {auth.formSubmissionErrorMessage.length
           ? auth.isEmailValid &&
             auth.isPasswordValid && (
-              <Text>{auth.formSubmissionErrorMessage}</Text>
+              <Text className={'text-error ml-2 mt-2 mb-4'}>
+                {auth.formSubmissionErrorMessage}
+              </Text>
             )
           : null}
-
         <View className="flex flex-row items-center my-10 justify-center">
-          <Text className="text-[#363772] mr-2">Déja un compte?</Text>
+          <Text className="text-mediumSlateBlue mr-2">Déja un compte?</Text>
           <Pressable onPress={() => auth.handleRedirect('Login', navigation)}>
-            <Text className="text-[#9296FE]">Connectez-vous</Text>
+            <Text className="text-lightSlateBlue">Connectez-vous</Text>
           </Pressable>
         </View>
       </View>

@@ -1,8 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {register} from './register';
 import {login} from './login';
-import {logout} from './logout';
-import {PURGE} from 'redux-persist';
+// import {PURGE} from 'redux-persist';
+// import {store} from '../index';
+// import {User} from '../../use-cases/loginUseCase/types';
 
 type InitialState = {
   entity: {};
@@ -24,12 +25,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(PURGE, () => {
-      return initialState;
-    });
-    // builder.addCase(logout.fulfilled, (state, action) => {
-    //   state.tokens.accessToken = action.payload;
-    // });
     builder.addCase(login.fulfilled, (state, action) => {
       if (action.payload.data.tokens) {
         state.tokens = {...action.payload.data.tokens};
