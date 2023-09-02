@@ -1,6 +1,7 @@
 import {Pressable, Text, TextInput, View} from 'react-native';
 import React, {
   Dispatch,
+  forwardRef,
   MutableRefObject,
   ReactNode,
   SetStateAction,
@@ -21,7 +22,7 @@ type Props = {
   className?: string;
   containerStyle?: string;
 };
-export function BaseTextInput(props: Props) {
+export const BaseTextInput = forwardRef((props: Props, ref) => {
   const {
     renderIcon,
     handlePressIcon,
@@ -44,4 +45,4 @@ export function BaseTextInput(props: Props) {
       )}
     </View>
   );
-}
+});
