@@ -8,14 +8,7 @@ import {TheIconSettings} from '../components/icons/TheIconSettings';
 export function TabsStack() {
   const Tab = createBottomTabNavigator();
   return (
-    <Tab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: () => {
-          if (route.name === 'Contacts') {
-            return <TheIconSettings />;
-          }
-        },
-      })}>
+    <Tab.Navigator>
       <Tab.Screen
         name="Contacts"
         component={ContactStackNavigator}
