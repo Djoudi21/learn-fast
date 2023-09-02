@@ -1,4 +1,4 @@
-import {InMemoryUserRepository} from '../repositories/inMemoryUserRepository';
+import {InMemoryAuthRepository} from '../repositories/inMemoryAuthRepository';
 import {UserRepository} from '../repositories/interfaces/UserRepository';
 import {LoginUseCase} from '../use-cases/loginUseCase/loginUseCase';
 
@@ -6,7 +6,7 @@ describe('login use case', () => {
   let userRepository: UserRepository;
   let loginUseCase: LoginUseCase;
   beforeEach(() => {
-    userRepository = new InMemoryUserRepository();
+    userRepository = new InMemoryAuthRepository();
     loginUseCase = new LoginUseCase(userRepository);
   });
   it('should login a user with valid credentials', async () => {

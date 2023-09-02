@@ -1,11 +1,11 @@
 import {RegisterUseCase} from '../use-cases/registerUseCase/registerUseCase';
-import {InMemoryUserRepository} from '../repositories/inMemoryUserRepository';
+import {InMemoryAuthRepository} from '../repositories/inMemoryAuthRepository';
 
 describe('register use case', () => {
-  let userRepository: InMemoryUserRepository;
+  let userRepository: InMemoryAuthRepository;
   let registerUseCase: RegisterUseCase;
   beforeEach(() => {
-    userRepository = new InMemoryUserRepository();
+    userRepository = new InMemoryAuthRepository();
     registerUseCase = new RegisterUseCase(userRepository);
   });
   it('should register a new user', async () => {

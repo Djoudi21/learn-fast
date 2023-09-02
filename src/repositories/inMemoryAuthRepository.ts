@@ -5,7 +5,7 @@ import {
   ErrorResponse,
 } from '../use-cases/registerUseCase/types';
 
-export class InMemoryUserRepository implements UserRepository {
+export class InMemoryAuthRepository implements UserRepository {
   users: User[] = [];
 
   login(user: User): Promise<any> {
