@@ -29,7 +29,7 @@ export const BaseTextInput = forwardRef<TextInput, Props>(
     return (
       <View>
         <View
-          className={`border-2 border-solid border-[#E9E9EE] rounded-3xl px-4 h-10 flex items-center justify-center flex-row ${containerStyle}`}>
+          className={`border-2 border-solid border-lavender rounded-3xl px-4 h-10 flex items-center justify-center flex-row ${containerStyle}`}>
           <TextInput ref={ref} {...rest} />
           <Pressable onPress={handlePressIcon}>{renderIcon?.()}</Pressable>
         </View>
