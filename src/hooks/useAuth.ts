@@ -1,9 +1,10 @@
-import {useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {LoginUseCase} from '../use-cases/loginUseCase/loginUseCase';
 import {RegisterUseCase} from '../use-cases/registerUseCase/registerUseCase';
-import {InMemoryUserRepository} from '../repositories/inMemoryUserRepository';
+import {InMemoryAuthRepository} from '../repositories/inMemoryAuthRepository';
 import {useDispatch} from 'react-redux';
-import {setTokens} from '../store/userSlice';
+import {setTokens} from '../store/auth/authSlice';
+import {TheIconEyeOpened} from '../components/icons/TheIconEyeOpened';
 
 export default function useAuth() {
   const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ export default function useAuth() {
   const [formSubmissionErrorMessage, setFormSubmissionErrorMessage] =
     useState('');
   const dispatch = useDispatch();
-  const userRepository = new InMemoryUserRepository();
+  const userRepository = new InMemoryAuthRepository();
   const loginUseCase = new LoginUseCase(userRepository);
   const registerUseCase = new RegisterUseCase(userRepository);
   const emailTextInputRef = useRef(null);
