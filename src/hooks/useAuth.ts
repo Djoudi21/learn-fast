@@ -8,8 +8,6 @@ import {ThunkDispatch} from '@reduxjs/toolkit';
 export default function useAuth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [formSubmissionErrorMessage, setFormSubmissionErrorMessage] =
@@ -22,13 +20,11 @@ export default function useAuth() {
   const passwordTextInputRef = useRef(null);
 
   async function handleLogin(navigation: any) {
-    emailValidation();
-    passwordValidation();
-
+    const isEmailValid = emailValidation();
+    const isPasswordValid = passwordValidation();
     if (!isEmailValid || !isPasswordValid) {
       return;
     }
-
     const user = {
       email,
       password,
@@ -48,9 +44,9 @@ export default function useAuth() {
   }
 
   async function handleRegister(navigation: any) {
-    emailValidation();
-    passwordValidation();
-    if (!isEmailValid || !isPasswordValid) {
+    const isEmailValid = emailValidation();
+    const isPasswordValid = passwordValidation();
+    if (isEmailValid || isPasswordValid) {
       return;
     }
 
@@ -70,25 +66,25 @@ export default function useAuth() {
   }
 
   function emailValidation() {
-    if (!email.length) {
-      setIsEmailValid(false);
+    if (email.length === 0) {
       setEmailErrorMessage('Please enter an email');
+      return false;
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      setIsEmailValid(false);
       setEmailErrorMessage('Email is not valid');
+      return false;
     } else {
       setEmailErrorMessage('');
-      setIsEmailValid(true);
+      return true;
     }
   }
 
   function passwordValidation() {
-    if (!password.length) {
-      setIsPasswordValid(false);
+    if (password.length === 0) {
       setPasswordErrorMessage('Please enter a paswword');
+      return false;
     } else {
       setPasswordErrorMessage('');
-      setIsPasswordValid(true);
+      return true;
     }
   }
 
@@ -109,8 +105,6 @@ export default function useAuth() {
   return {
     handleLogin,
     handleRegister,
-    // emailValidation,
-    // passwordValidation,
     handleRedirect,
     handleFocusPasswordInput,
     handleFocusEmailInput,
@@ -124,10 +118,6 @@ export default function useAuth() {
     setEmail,
     password,
     setPassword,
-    isEmailValid,
-    setIsEmailValid,
-    isPasswordValid,
-    setIsPasswordValid,
     iSecureTextEntry,
     setIsSecureTextEntry,
     isPasswordFocused,
