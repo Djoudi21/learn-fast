@@ -3,7 +3,6 @@ import {Settings} from '../screens/Settings';
 import React from 'react';
 import {ContactStackNavigator} from './ContactStack';
 import {ConversationStackNavigator} from './ConversationStack';
-import {TheIconSettings} from '../components/icons/TheIconSettings';
 
 export function TabsStack() {
   const Tab = createBottomTabNavigator();
