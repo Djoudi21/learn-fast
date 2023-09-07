@@ -9,10 +9,6 @@ export class RegisterUseCase {
   }
 
   async register(credentials: Credentials) {
-    if (!credentials.email.includes('@')) {
-      throw new Error('wrong email');
-    }
-
     return await this.authRepository.register(credentials);
   }
 }

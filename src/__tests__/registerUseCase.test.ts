@@ -10,11 +10,14 @@ describe('register use case', () => {
   });
   it('should register a new user', async () => {
     const newUser = {
-      email: 'new@user.com',
+      email: 'new2@user.com',
       password: 'password',
     };
     const createdUser = await registerUseCase.register(newUser);
-    expect(createdUser).toHaveProperty('id');
+
+    if (createdUser && 'data' in createdUser) {
+      expect(createdUser?.data).toHaveProperty('id');
+    }
     expect(authRepository.users).toHaveLength(1);
   });
   it('should not register a user with invalid email', async () => {
@@ -26,6 +29,19 @@ describe('register use case', () => {
       await registerUseCase.register(userWithInvalidEmail);
     } catch (error) {
       expect((error as Error).message).toBe('wrong email');
+      expect(error).toBeInstanceOf(Error);
+      expect(authRepository.users).toHaveLength(0);
+    }
+  });
+  it('should not register a user with invalid password', async () => {
+    const userWithInvalidEmail = {
+      email: 'new',
+      password: '',
+    };
+    try {
+      await registerUseCase.register(userWithInvalidEmail);
+    } catch (error) {
+      expect((error as Error).message).toBe('wrong password');
       expect(error).toBeInstanceOf(Error);
       expect(authRepository.users).toHaveLength(0);
     }

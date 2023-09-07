@@ -41,8 +41,14 @@ export class InMemoryAuthRepository implements AuthRepository {
   register(
     credentials: Credentials,
   ): Promise<CreatedUserResponse | AxiosErrorResponse> {
+    if (!credentials.password.length) {
+      throw new Error('wrong password');
+    }
+    if (!credentials.email.includes('@')) {
+      throw new Error('wrong email');
+    }
     const existingUser = this.users.find(el => el.email === credentials.email);
-    if (!existingUser) {
+    if (existingUser) {
       throw new Error('User already exists');
     }
     const userWithId: CreatedUser = {
