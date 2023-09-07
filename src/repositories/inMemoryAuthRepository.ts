@@ -1,20 +1,21 @@
 import {AuthRepository} from './interfaces/AuthRepository';
-import {User} from '../use-cases/loginUseCase/types';
+import {Credentials} from '../use-cases/loginUseCase/types';
 import {
   CreatedUserResponse,
-  ErrorResponse,
+  AxiosErrorResponse,
 } from '../use-cases/registerUseCase/types';
+import {CreatedUser} from '../types';
 
 export class InMemoryAuthRepository implements AuthRepository {
-  users: User[] = [];
+  users: CreatedUser[] = [];
 
-  login(user: User): Promise<any> {
-    const isEmailValid: User | undefined = this.users.find(
-      el => el.email === user.email,
+  login(credentials: Credentials): Promise<any> {
+    const isEmailValid: CreatedUser | undefined = this.users.find(
+      el => el.email === credentials.email,
     );
 
-    const isPasswordValid: User | undefined = this.users.find(
-      el => el.password === user.password,
+    const isPasswordValid: CreatedUser | undefined = this.users.find(
+      el => el.password === credentials.password,
     );
 
     if (!isEmailValid) {
@@ -26,8 +27,8 @@ export class InMemoryAuthRepository implements AuthRepository {
     }
     const response = {
       tokens: {
-        accessToken: `accessToken${JSON.stringify(user)}`,
-        refreshToken: `refreshToken${JSON.stringify(user)}`,
+        accessToken: `accessToken${JSON.stringify(credentials)}`,
+        refreshToken: `refreshToken${JSON.stringify(credentials)}`,
       },
     };
     return Promise.resolve(response);
@@ -37,20 +38,24 @@ export class InMemoryAuthRepository implements AuthRepository {
     return Promise.resolve();
   }
 
-  register(user: User): Promise<CreatedUserResponse | ErrorResponse> {
-    const isUser = this.users.find(el => el.email === user.email);
-    if (isUser) {
+  register(
+    credentials: Credentials,
+  ): Promise<CreatedUserResponse | AxiosErrorResponse> {
+    const existingUser = this.users.find(el => el.email === credentials.email);
+    if (!existingUser) {
       throw new Error('User already exists');
     }
-    const userWithId = {
-      ...user,
-      id: this.users.length + 1,
+    const userWithId: CreatedUser = {
+      ...credentials,
+      id: String(this.users.length + 1),
     };
     this.users.push(userWithId);
+
     const response: CreatedUserResponse = {
       status: 201,
       data: {
-        ...userWithId,
+        id: userWithId.id,
+        email: userWithId.email,
         tokens: {
           accessToken: `${userWithId.email}`,
           refreshToken: '',

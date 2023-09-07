@@ -1,5 +1,5 @@
 import {AuthRepository} from '../../repositories/interfaces/AuthRepository';
-import {User} from './types';
+import {Credentials} from './types';
 
 export class LoginUseCase {
   private authRepository: AuthRepository;
@@ -8,7 +8,7 @@ export class LoginUseCase {
     this.authRepository = authRepository;
   }
 
-  async login(user: User) {
-    return this.authRepository.login(user);
+  async login(credentials: Credentials) {
+    return this.authRepository.login(credentials);
   }
 }

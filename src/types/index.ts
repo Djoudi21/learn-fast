@@ -13,3 +13,9 @@ export type RegisterNavigationProps = NativeStackScreenProps<
   RootStackParamList,
   'Register'
 >;
+
+export type CreatedUser = {
+  id: string;
+  email: string;
+  password: string;
+};

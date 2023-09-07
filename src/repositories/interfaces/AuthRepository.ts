@@ -1,15 +1,23 @@
-import {User} from '../../use-cases/loginUseCase/types';
+import {
+  Credentials,
+  LoggedUserResponse,
+} from '../../use-cases/loginUseCase/types';
 import {
   CreatedUserResponse,
-  ErrorResponse,
+  AxiosErrorResponse,
 } from '../../use-cases/registerUseCase/types';
+import {CreatedUser} from '../../types';
 
 export interface AuthRepository {
-  users: User[];
+  users: CreatedUser[];
 
-  login(user: User): Promise<any>;
+  login(
+    credentials: Credentials,
+  ): Promise<LoggedUserResponse | AxiosErrorResponse | undefined>;
 
   logout(): Promise<any>;
 
-  register(user: User): Promise<CreatedUserResponse | ErrorResponse>;
+  register(
+    credentials: Credentials,
+  ): Promise<CreatedUserResponse | AxiosErrorResponse | undefined>;
 }

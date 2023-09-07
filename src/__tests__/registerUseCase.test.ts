@@ -32,6 +32,7 @@ describe('register use case', () => {
   });
   it('should not register an existing user', async () => {
     const existingUser = {
+      id: '1',
       email: 'existing@user.com',
       password: 'password',
     };

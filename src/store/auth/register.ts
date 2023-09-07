@@ -1,14 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {RegisterUseCase} from '../../use-cases/registerUseCase/registerUseCase';
-import {InMemoryAuthRepository} from '../../repositories/inMemoryAuthRepository';
-import {User} from '../../use-cases/loginUseCase/types';
+import {Credentials} from '../../use-cases/loginUseCase/types';
+import {AxiosAuthRepository} from '../../repositories/interfaces/axiosAuthRepository';
 
 export const register = createAsyncThunk(
   'auth/register',
-  async (user: User) => {
-    console.log('register async thunk', user);
-    const inMemoryAuthRepository = new InMemoryAuthRepository();
-    const registerUseCase = new RegisterUseCase(inMemoryAuthRepository);
-    return await registerUseCase.register(user);
+  async (credentials: Credentials) => {
+    const axiosAuthRepository = new AxiosAuthRepository();
+    const registerUseCase = new RegisterUseCase(axiosAuthRepository);
+    return await registerUseCase.register(credentials);
   },
 );

@@ -32,8 +32,8 @@ export default function useAuth() {
 
     try {
       dispatch(login(user));
-      const accessToken = store.getState().auth.tokens.accessToken;
-      return accessToken?.length
+      const accessToken = store.getState().auth.entity.tokens.accessToken;
+      return accessToken
         ? navigation.push('Tab')
         : setFormSubmissionErrorMessage("Aucun utilisateur n'a été trouvé");
     } catch (e) {
@@ -46,7 +46,8 @@ export default function useAuth() {
   async function handleRegister(navigation: any) {
     const isEmailValid = emailValidation();
     const isPasswordValid = passwordValidation();
-    if (isEmailValid || isPasswordValid) {
+
+    if (!isEmailValid || !isPasswordValid) {
       return;
     }
 
@@ -55,9 +56,10 @@ export default function useAuth() {
       password,
     };
     try {
-      dispatch(register(user));
-      dispatch(login(user));
-      navigation.push('Tab');
+      const res = await dispatch(register(user)).unwrap();
+      if (res?.status === 201) {
+        navigation.push('Tab');
+      }
     } catch (e) {
       // @ts-ignore
       const errorMessage = setSubmissionErrorMessage(e.response.data.message);

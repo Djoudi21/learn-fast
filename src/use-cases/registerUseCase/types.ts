@@ -1,17 +1,16 @@
 export type CreatedUserResponse = {
-  status: 201;
+  status: number;
   data: {
     email: string;
-    id: number;
+    id: string;
     tokens: {
       accessToken: string;
       refreshToken: string;
     };
   };
 };
-export type ErrorResponse = {
-  data: {
-    error: string;
-    tokens: null;
-  };
+
+export type AxiosErrorResponse = {
+  status: number;
+  message: string;
 };
