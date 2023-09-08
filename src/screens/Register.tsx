@@ -60,14 +60,11 @@ export function Register({navigation}: any) {
           <Text className="text-center text-hanPurple">Validez</Text>
         </Pressable>
 
-        {/*{auth.formSubmissionErrorMessage.length*/}
-        {/*  ? auth.isEmailValid &&*/}
-        {/*    auth.isPasswordValid && (*/}
-        {/*      <Text className={'text-error ml-2 mt-2 mb-4'}>*/}
-        {/*        {auth.formSubmissionErrorMessage}*/}
-        {/*      </Text>*/}
-        {/*    )*/}
-        {/*  : null}*/}
+        {auth.formSubmissionErrorMessage.length ? (
+          <Text className={'text-error ml-2 mt-2 mb-4'}>
+            {auth.formSubmissionErrorMessage}
+          </Text>
+        ) : null}
 
         <View className="flex flex-row items-center my-10 justify-center">
           <Text className="text-mediumSlateBlue mr-2">Déja un compte?</Text>

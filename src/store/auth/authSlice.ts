@@ -6,6 +6,8 @@ type InitialState = {
   entity: {
     id: string;
     email: string;
+  };
+  tokens: {
     accessToken: string;
     refreshToken: string;
   };
@@ -15,6 +17,8 @@ const initialState: InitialState = {
   entity: {
     id: '',
     email: '',
+  },
+  tokens: {
     accessToken: '',
     refreshToken: '',
   },
@@ -27,6 +31,9 @@ export const authSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       if (action.payload && 'data' in action.payload) {
         state.entity = {...action.payload.data};
+      }
+      if (action.payload && 'tokens' in action.payload) {
+        state.tokens.accessToken = {...action.payload.tokens.accessToken};
       }
     });
     builder.addCase(register.fulfilled, (state, action) => {

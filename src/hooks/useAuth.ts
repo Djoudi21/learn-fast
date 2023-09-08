@@ -31,16 +31,12 @@ export default function useAuth() {
     };
 
     try {
-      await dispatch(login(user)).unwrap();
-      const accessToken = store.getState().auth.entity.accessToken;
+      const loginResponse = await dispatch(login(user)).unwrap();
 
-      return accessToken
+      loginResponse?.status === 200
         ? navigation.push('Tab')
         : setFormSubmissionErrorMessage("Aucun utilisateur n'a été trouvé");
-    } catch (e) {
-      // const errorMessage = setFormSubmissionErrorMessage(e.response.data.message);
-      // setFormSubmissionErrorMessage(errorMessage);
-    }
+    } catch (e) {}
   }
 
   async function handleRegister(navigation: any) {
@@ -56,14 +52,19 @@ export default function useAuth() {
       password,
     };
     try {
-      const res = await dispatch(register(user)).unwrap();
-      if (res?.status === 201) {
-        navigation.push('Tab');
+      const registerResponse = await dispatch(register(user)).unwrap();
+
+      if (registerResponse?.status === 201) {
+        const loginResponse = await dispatch(login(user)).unwrap();
+
+        if (loginResponse?.status === 200) {
+          setFormSubmissionErrorMessage('');
+          navigation.push('Tab');
+        }
+      } else {
+        setFormSubmissionErrorMessage('Veuillez choisir un autre email');
       }
-    } catch (e) {
-      // const errorMessage = setFormSubmissionErrorMessage(e.response.message);
-      // setFormSubmissionErrorMessage(errorMessage);
-    }
+    } catch (e) {}
   }
 
   function emailValidation() {
