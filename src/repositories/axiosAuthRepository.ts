@@ -1,13 +1,10 @@
-import {AuthRepository} from './AuthRepository';
-import {
-  Credentials,
-  LoggedUserResponse,
-} from '../../use-cases/loginUseCase/types';
+import {AuthRepository} from './interfaces/AuthRepository';
+import {Credentials, LoggedUserResponse} from '../use-cases/loginUseCase/types';
 import {
   CreatedUserResponse,
   AxiosErrorResponse,
-} from '../../use-cases/registerUseCase/types';
-import {CreatedUser} from '../../types';
+} from '../use-cases/registerUseCase/types';
+import {CreatedUser} from '../types';
 import axios from 'axios';
 
 export class AxiosAuthRepository implements AuthRepository {

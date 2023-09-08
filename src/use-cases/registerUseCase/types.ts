@@ -3,10 +3,8 @@ export type CreatedUserResponse = {
   data: {
     email: string;
     id: string;
-    tokens: {
-      accessToken: string;
-      refreshToken: string;
-    };
+    accessToken: string;
+    refreshToken: string;
   };
 };
 

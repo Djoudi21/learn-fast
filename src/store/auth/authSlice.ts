@@ -6,10 +6,8 @@ type InitialState = {
   entity: {
     id: string;
     email: string;
-    tokens: {
-      accessToken: string;
-      refreshToken: string;
-    };
+    accessToken: string;
+    refreshToken: string;
   };
 };
 
@@ -17,10 +15,8 @@ const initialState: InitialState = {
   entity: {
     id: '',
     email: '',
-    tokens: {
-      accessToken: '',
-      refreshToken: '',
-    },
+    accessToken: '',
+    refreshToken: '',
   },
 };
 export const authSlice = createSlice({

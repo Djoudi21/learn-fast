@@ -31,15 +31,15 @@ export default function useAuth() {
     };
 
     try {
-      dispatch(login(user));
-      const accessToken = store.getState().auth.entity.tokens.accessToken;
+      await dispatch(login(user)).unwrap();
+      const accessToken = store.getState().auth.entity.accessToken;
+
       return accessToken
         ? navigation.push('Tab')
         : setFormSubmissionErrorMessage("Aucun utilisateur n'a été trouvé");
     } catch (e) {
-      // @ts-ignore
-      const errorMessage = setSubmissionErrorMessage(e.response.data.message);
-      setFormSubmissionErrorMessage(errorMessage);
+      // const errorMessage = setFormSubmissionErrorMessage(e.response.data.message);
+      // setFormSubmissionErrorMessage(errorMessage);
     }
   }
 
@@ -61,9 +61,8 @@ export default function useAuth() {
         navigation.push('Tab');
       }
     } catch (e) {
-      // @ts-ignore
-      const errorMessage = setSubmissionErrorMessage(e.response.data.message);
-      setFormSubmissionErrorMessage(errorMessage);
+      // const errorMessage = setFormSubmissionErrorMessage(e.response.message);
+      // setFormSubmissionErrorMessage(errorMessage);
     }
   }
 
