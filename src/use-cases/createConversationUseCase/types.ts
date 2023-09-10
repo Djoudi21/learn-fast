@@ -3,10 +3,10 @@ export type Message = {
   content: string;
 };
 
-export type Conversation = {
-  messages?: Message[];
-};
+export type Conversation = {};
 
-export type CreatedConversationResponse = Conversation & {
-  id: number;
+export type CreatedConversationResponse = {
+  data: {
+    conversations: Conversation[];
+  };
 };

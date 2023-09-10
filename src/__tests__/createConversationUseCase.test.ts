@@ -1,7 +1,7 @@
 import {CreateConversationUseCase} from '../use-cases/createConversationUseCase/createConversationUseCase';
 import {inMemoryConversationRepository} from '../repositories/inMemoryConversationRepository';
 
-describe('create conversation use case', () => {
+describe('create conversations use case', () => {
   let conversationRepository: inMemoryConversationRepository;
   let createConversationUseCase: CreateConversationUseCase;
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('create conversation use case', () => {
       conversationRepository,
     );
   });
-  it('should create a conversation', async () => {
+  it('should create a conversations', async () => {
     const response = await createConversationUseCase.execute();
     expect(conversationRepository.conversations).toHaveLength(1);
     expect(response).toHaveProperty('id');

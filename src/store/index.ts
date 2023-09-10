@@ -1,5 +1,6 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
+import conversationsReducer from './conversations/conversationsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   persistStore,
@@ -21,6 +22,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  conversations: conversationsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

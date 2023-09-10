@@ -6,4 +6,7 @@ import {
 export interface ConversationRepository {
   conversations: Conversation[];
   createConversation: () => Promise<CreatedConversationResponse>;
+  listConversationsByUserId: (
+    userId: User['id'],
+  ) => Promise<CreatedConversationResponse>;
 }

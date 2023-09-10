@@ -1,4 +1,4 @@
-import {TouchableOpacity, View} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 import React, {ReactNode, useEffect} from 'react';
 import {ConversationListItem} from './ConversationListItem';
 
@@ -12,24 +12,29 @@ export function ConversationList({conversations, navigation, button}: Props) {
     navigation.setOptions({
       headerRight: () => button,
     });
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigation]);
+
+  const renderItem = item => {
+    return (
+      <TouchableOpacity
+        key={item.id}
+        onPress={() => {
+          navigation.navigate('Conversations', {
+            screen: 'ConversationDetails',
+          });
+        }}>
+        <ConversationListItem conversation={item} />
+      </TouchableOpacity>
+    );
+  };
   return (
     <View>
-      {conversations.map((conversation: any) => {
-        return (
-          <TouchableOpacity
-            key={conversation.id}
-            onPress={() => {
-              navigation.navigate('Conversations', {
-                screen: 'ConversationDetails',
-              });
-            }}>
-            <ConversationListItem conversation={conversation} />
-          </TouchableOpacity>
-        );
-      })}
+      <FlatList
+        data={conversations}
+        renderItem={({item}) => renderItem(item)}
+        keyExtractor={item => item.id}
+      />
     </View>
   );
 }

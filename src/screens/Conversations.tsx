@@ -1,22 +1,20 @@
 import {Pressable, SafeAreaView, Text} from 'react-native';
-import React, {useState} from 'react';
-import {CreatedContactResponse} from '../use-cases/createContactUseCase/type';
+import React, {useEffect, useState} from 'react';
 import {ConversationList} from '../components/ConversationList';
+import {useDispatch, useSelector} from 'react-redux';
+import {listConversationsByUserId} from '../store/conversations/listConversationsByUserId';
 
 type Props = {
   navigation: any;
 };
 export function Conversations({navigation}: Props) {
-  const [conversations] = useState([
-    {
-      id: 1,
-      title: 'Conv1',
-    },
-    {
-      id: 2,
-      title: 'Conv2',
-    },
-  ]);
+  const conversations = useSelector(state => state.conversations.conversations);
+  // console.log('TOTO', conversations);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(listConversationsByUserId(1));
+  }, []);
   return (
     <SafeAreaView>
       <ConversationList
