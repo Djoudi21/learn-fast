@@ -8,7 +8,7 @@ export type CreatedUserResponse = {
   };
 };
 
-export type AxiosErrorResponse = {
+export type RequestErrorResponse = {
   status: number;
   message: string;
 };

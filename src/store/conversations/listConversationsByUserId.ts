@@ -1,6 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {ListConversationsUseCase} from '../../use-cases/listConversationsUseCase/listConversationsUseCase';
 import {AxiosConversationRepository} from '../../repositories/axiosConversationRepository';
+import {User} from '../../types';
 
 export const listConversationsByUserId = createAsyncThunk(
   'conversations/listConversationsByUserId',

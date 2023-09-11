@@ -19,3 +19,8 @@ export type CreatedUser = {
   email: string;
   password: string;
 };
+
+export type User = {
+  id: string | number;
+  email: string;
+};

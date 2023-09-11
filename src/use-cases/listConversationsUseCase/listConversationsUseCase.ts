@@ -1,4 +1,5 @@
 import {ConversationRepository} from '../../repositories/interfaces/ConversationRepository';
+import {User} from '../../types';
 
 export class ListConversationsUseCase {
   conversationRepository: ConversationRepository;

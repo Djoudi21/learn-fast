@@ -2,7 +2,7 @@ import {AuthRepository} from './interfaces/AuthRepository';
 import {Credentials} from '../use-cases/loginUseCase/types';
 import {
   CreatedUserResponse,
-  AxiosErrorResponse,
+  RequestErrorResponse,
 } from '../use-cases/registerUseCase/types';
 import {CreatedUser} from '../types';
 
@@ -40,7 +40,7 @@ export class InMemoryAuthRepository implements AuthRepository {
 
   register(
     credentials: Credentials,
-  ): Promise<CreatedUserResponse | AxiosErrorResponse> {
+  ): Promise<CreatedUserResponse | RequestErrorResponse> {
     if (!credentials.password.length) {
       throw new Error('wrong password');
     }

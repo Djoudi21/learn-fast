@@ -2,7 +2,7 @@ import {AuthRepository} from './interfaces/AuthRepository';
 import {Credentials, LoggedUserResponse} from '../use-cases/loginUseCase/types';
 import {
   CreatedUserResponse,
-  AxiosErrorResponse,
+  RequestErrorResponse,
 } from '../use-cases/registerUseCase/types';
 import {CreatedUser} from '../types';
 import axios from 'axios';
@@ -12,7 +12,7 @@ export class AxiosAuthRepository implements AuthRepository {
 
   async login(
     credentials: Credentials,
-  ): Promise<LoggedUserResponse | AxiosErrorResponse | undefined> {
+  ): Promise<LoggedUserResponse | RequestErrorResponse | undefined> {
     try {
       const response = await axios.post('http://127.0.0.1:3000/login', {
         data: credentials,
@@ -32,7 +32,7 @@ export class AxiosAuthRepository implements AuthRepository {
 
   async register(
     credentials: Credentials,
-  ): Promise<CreatedUserResponse | AxiosErrorResponse | undefined> {
+  ): Promise<CreatedUserResponse | RequestErrorResponse | undefined> {
     try {
       const response = await axios.post('http://127.0.0.1:3000/register', {
         data: credentials,

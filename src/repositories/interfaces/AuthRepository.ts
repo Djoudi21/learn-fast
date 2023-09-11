@@ -4,7 +4,7 @@ import {
 } from '../../use-cases/loginUseCase/types';
 import {
   CreatedUserResponse,
-  AxiosErrorResponse,
+  RequestErrorResponse,
 } from '../../use-cases/registerUseCase/types';
 import {CreatedUser} from '../../types';
 
@@ -13,11 +13,11 @@ export interface AuthRepository {
 
   login(
     credentials: Credentials,
-  ): Promise<LoggedUserResponse | AxiosErrorResponse | undefined>;
+  ): Promise<LoggedUserResponse | RequestErrorResponse | undefined>;
 
   logout(): Promise<any>;
 
   register(
     credentials: Credentials,
-  ): Promise<CreatedUserResponse | AxiosErrorResponse | undefined>;
+  ): Promise<CreatedUserResponse | RequestErrorResponse | undefined>;
 }

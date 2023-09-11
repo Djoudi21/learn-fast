@@ -11,8 +11,3 @@ export type LoggedUserResponse = {
     refreshToken: string;
   };
 };
-
-export type AxiosErrorResponse = {
-  status: number;
-  message: string;
-};

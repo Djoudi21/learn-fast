@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {ConversationRepository} from './interfaces/ConversationRepository';
+import {User} from '../types';
 
 export class AxiosConversationRepository implements ConversationRepository {
   conversations: any = [];
