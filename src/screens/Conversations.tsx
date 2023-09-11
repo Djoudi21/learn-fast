@@ -3,13 +3,16 @@ import React, {useEffect} from 'react';
 import {ConversationList} from '../components/ConversationList';
 import {useDispatch, useSelector} from 'react-redux';
 import {listConversationsByUserId} from '../store/conversations/listConversationsByUserId';
+import {AppDispatch, RootState} from '../store';
 
 type Props = {
   navigation: any;
 };
 export function Conversations({navigation}: Props) {
-  const conversations = useSelector(state => state.conversations.conversations);
-  const userId = useSelector(state => state.auth.entity.id);
+  const conversations = useSelector(
+    (state: RootState) => state.conversations.conversations,
+  );
+  const userId = useSelector((state: RootState) => state.auth.entity.id);
 
   const dispatch = useDispatch();
 
