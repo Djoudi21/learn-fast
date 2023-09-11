@@ -30,15 +30,15 @@ export const authSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(login.fulfilled, (state, action) => {
       if (action.payload && 'data' in action.payload) {
-        state.entity = {...action.payload.data};
+        state.entity = action.payload.data;
       }
       if (action.payload && 'tokens' in action.payload) {
-        state.tokens.accessToken = {...action.payload.tokens.accessToken};
+        state.tokens.accessToken = action.payload.tokens.accessToken;
       }
     });
     builder.addCase(register.fulfilled, (state, action) => {
       if (action.payload && 'data' in action.payload) {
-        state.entity = {...action.payload.data};
+        state.entity = action.payload.data;
       }
     });
     // builder.addCase(register.rejected, (state, action) => {});
