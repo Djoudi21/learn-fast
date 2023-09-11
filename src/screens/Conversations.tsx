@@ -1,5 +1,5 @@
 import {Pressable, SafeAreaView, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {ConversationList} from '../components/ConversationList';
 import {useDispatch, useSelector} from 'react-redux';
 import {listConversationsByUserId} from '../store/conversations/listConversationsByUserId';
@@ -9,12 +9,14 @@ type Props = {
 };
 export function Conversations({navigation}: Props) {
   const conversations = useSelector(state => state.conversations.conversations);
-  // console.log('TOTO', conversations);
+  const userId = useSelector(state => state.auth.entity.id);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(listConversationsByUserId(1));
+    dispatch(listConversationsByUserId(userId));
   }, []);
+
   return (
     <SafeAreaView>
       <ConversationList

@@ -4,7 +4,7 @@ import {AxiosConversationRepository} from '../../repositories/axiosConversationR
 
 export const listConversationsByUserId = createAsyncThunk(
   'conversations/listConversationsByUserId',
-  async (userId: number) => {
+  async (userId: User['id']) => {
     const axiosConversationRepository = new AxiosConversationRepository();
     const listConversationsUseCase = new ListConversationsUseCase(
       axiosConversationRepository,

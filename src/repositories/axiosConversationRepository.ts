@@ -23,6 +23,7 @@ export class AxiosConversationRepository implements ConversationRepository {
       );
 
       if (response.status === 200) {
+        console.log('RES'), response.data;
         return response.data;
       }
     } catch (error) {

@@ -15,7 +15,7 @@ export function ConversationList({conversations, navigation, button}: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigation]);
 
-  const renderItem = item => {
+  const renderItem = (item: {id: React.Key | null | undefined}) => {
     return (
       <TouchableOpacity
         key={item.id}

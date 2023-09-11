@@ -32,11 +32,13 @@ export const conversationsSlice = createSlice({
     });
     builder.addCase(listConversationsByUserId.fulfilled, (state, action) => {
       console.log(action.payload.data.conversations);
-      state.conversations = action.payload.data.conversations.map(conv => {
-        return {
-          ...conv.conversation,
-        };
-      });
+      state.conversations = action.payload.data.conversations.map(
+        conversation => {
+          return {
+            ...conversation,
+          };
+        },
+      );
       // if (action.payload && 'data' in action.payload) {
       //   state.entity = {...action.payload.data};
       // }
