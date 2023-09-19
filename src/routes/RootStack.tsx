@@ -5,6 +5,7 @@ import {Register} from '../screens/Register';
 import {useSelector} from 'react-redux';
 import {Text} from 'react-native';
 import {TabsStack} from './TabsStack';
+import {TheBottomModal} from '../components/TheBottomModal';
 
 const RootStack = createNativeStackNavigator();
 

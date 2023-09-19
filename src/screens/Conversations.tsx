@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import {ConversationList} from '../components/ConversationList';
 import {useDispatch, useSelector} from 'react-redux';
 import {listConversationsByUserId} from '../store/conversations/listConversationsByUserId';
-import {AppDispatch, RootState} from '../store';
+import {RootState} from '../store';
 
 type Props = {
   navigation: any;
@@ -18,7 +18,7 @@ export function Conversations({navigation}: Props) {
 
   useEffect(() => {
     dispatch(listConversationsByUserId(userId));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <SafeAreaView>
