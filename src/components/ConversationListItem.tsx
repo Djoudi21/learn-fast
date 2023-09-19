@@ -13,8 +13,15 @@ export function ConversationListItem({conversation}: Props) {
   const conversationTitle = contact[0].email;
 
   return (
-    <View className="w-full h-20 border border-solid p-4 flex items-center justify-center">
-      <Text>{conversationTitle}</Text>
+    <View className="w-full h-20 px-4 flex flex-row items-center">
+      <Text className={'mr-10 pb-4'}>avatar</Text>
+      <View
+        className={
+          'flex flex-col gap-4 border-b border-b-whitesmoke border-b-solid w-full pb-4 pt-2'
+        }>
+        <Text className={'font-bold'}>{conversationTitle}</Text>
+        <Text className={'font-light'}>dernier message</Text>
+      </View>
     </View>
   );
 }

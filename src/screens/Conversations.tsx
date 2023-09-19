@@ -21,7 +21,7 @@ export function Conversations({navigation}: Props) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className={'bg-[#FDFDFD] h-screen'}>
       <ConversationList
         conversations={conversations}
         navigation={navigation}

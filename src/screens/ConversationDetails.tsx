@@ -3,7 +3,7 @@ import React from 'react';
 
 export function ConversationDetails() {
   return (
-    <SafeAreaView>
+    <SafeAreaView className={'bg-[#FDFDFD] h-screen'}>
       <Text>Conv details</Text>
     </SafeAreaView>
   );

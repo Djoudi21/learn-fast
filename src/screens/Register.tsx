@@ -21,7 +21,7 @@ export function Register({navigation}: any) {
   };
 
   return (
-    <SafeAreaView className="bg-Whitesmoke h-full">
+    <SafeAreaView className="bg-whitesmoke h-full">
       <View className="m-4">
         <Text className="text-xl text-midnightBlue my-6">Inscrivez-vous</Text>
 
