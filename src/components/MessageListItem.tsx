@@ -11,11 +11,11 @@ export function MessageListItem({message}: Props) {
   console.log('user', message);
   const setUserStyle = () => {
     return message.userId === currentUserId
-      ? 'self-end bg-lavender'
-      : 'bg-hanPurple';
+      ? 'self-end bg-lavender w-fit max-w-1/2'
+      : 'bg-hanPurple w-1/2';
   };
   return (
-    <View className={`w-3/4 flex p-4 m-4 rounded ${setUserStyle()}`}>
+    <View className={`flex p-4 m-4 rounded ${setUserStyle()}`}>
       <Text className={''}>{message.text}</Text>
     </View>
   );

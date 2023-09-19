@@ -12,7 +12,7 @@ export function ConversationDetails({route}) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listMessagesByConversationId(conversationId));
-  }, []);
+  }, [messages]);
 
   const renderItem = (message: Message) => {
     return <MessageListItem message={message} />;
