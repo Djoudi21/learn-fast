@@ -37,10 +37,7 @@ export class AxiosAuthRepository implements AuthRepository {
       const response = await axios.post('http://127.0.0.1:3000/register', {
         data: credentials,
       });
-
-      if (response.status === 200) {
-        return response.data as CreatedUserResponse;
-      }
+      return response.data as CreatedUserResponse;
     } catch (error) {
       console.log(error);
     }

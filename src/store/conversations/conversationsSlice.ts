@@ -31,17 +31,7 @@ export const conversationsSlice = createSlice({
       // }
     });
     builder.addCase(listConversationsByUserId.fulfilled, (state, action) => {
-      console.log(action.payload.data.conversations);
-      state.conversations = action.payload.data.conversations.map(
-        conversation => {
-          return {
-            ...conversation,
-          };
-        },
-      );
-      // if (action.payload && 'data' in action.payload) {
-      //   state.entity = {...action.payload.data};
-      // }
+      state.conversations = action.payload.conversations;
     });
     // builder.addCase(register.rejected, (state, action) => {});
   },

@@ -15,16 +15,19 @@ export function ConversationList({conversations, navigation, button}: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigation]);
 
-  const renderItem = (item: {id: React.Key | null | undefined}) => {
+  const renderItem = (conversation: any) => {
     return (
       <TouchableOpacity
-        key={item.id}
+        key={conversation.id}
         onPress={() => {
           navigation.navigate('Conversations', {
             screen: 'ConversationDetails',
+            params: {
+              conversationId: conversation.id,
+            },
           });
         }}>
-        <ConversationListItem conversation={item} />
+        <ConversationListItem conversation={conversation} />
       </TouchableOpacity>
     );
   };

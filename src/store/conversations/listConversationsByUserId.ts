@@ -10,6 +10,13 @@ export const listConversationsByUserId = createAsyncThunk(
     const listConversationsUseCase = new ListConversationsUseCase(
       axiosConversationRepository,
     );
-    return await listConversationsUseCase.listConversationsByUserId(userId);
+    try {
+      const response = await listConversationsUseCase.listConversationsByUserId(
+        userId,
+      );
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   },
 );

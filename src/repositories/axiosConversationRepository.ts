@@ -23,10 +23,7 @@ export class AxiosConversationRepository implements ConversationRepository {
         `http://127.0.0.1:3000/users/${userId}/conversations`,
       );
 
-      if (response.status === 200) {
-        console.log('RES'), response.data;
-        return response.data;
-      }
+      return response.data;
     } catch (error) {
       console.log(error);
     }

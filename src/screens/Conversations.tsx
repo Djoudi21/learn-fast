@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import {ConversationList} from '../components/ConversationList';
 import {useDispatch, useSelector} from 'react-redux';
 import {listConversationsByUserId} from '../store/conversations/listConversationsByUserId';
-import {RootState} from '../store';
+import {AppDispatch, RootState} from '../store';
 
 type Props = {
   navigation: any;
@@ -14,7 +14,7 @@ export function Conversations({navigation}: Props) {
   );
   const userId = useSelector((state: RootState) => state.auth.entity.id);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(listConversationsByUserId(userId));
