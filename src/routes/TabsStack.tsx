@@ -1,8 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Settings} from '../screens/Settings';
 import React from 'react';
-import {ContactStackNavigator} from './ContactStack';
-import {ConversationStackNavigator} from './ConversationStack';
+import {Conversations} from '../screens/Conversations';
+import {Contacts} from '../screens/Contacts';
 
 export function TabsStack() {
   const Tab = createBottomTabNavigator();
@@ -10,14 +10,14 @@ export function TabsStack() {
     <Tab.Navigator>
       <Tab.Screen
         name="Contacts"
-        component={ContactStackNavigator}
+        component={Contacts}
         options={{
           headerShown: false,
         }}
       />
       <Tab.Screen
         name="Conversations"
-        component={ConversationStackNavigator}
+        component={Conversations}
         options={{
           headerShown: false,
         }}

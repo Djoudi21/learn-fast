@@ -1,5 +1,5 @@
 import {Pressable, SafeAreaView, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import useAuth from '../hooks/useAuth';
 import {TheIconEyeOpened} from '../components/icons/TheIconEyeOpened';
 import {TheIconEyeClosed} from '../components/icons/TheIconEyeClosed';

@@ -30,7 +30,6 @@ export const messagesSlice = createSlice({
     //   // }
     // });
     builder.addCase(listMessagesByConversationId.fulfilled, (state, action) => {
-      console.log('PAYLOAD', action.payload);
       state.messages = action.payload.messages;
     });
     // builder.addCase(register.rejected, (state, action) => {});

@@ -11,6 +11,7 @@ type InitialState = {
     accessToken: string;
     refreshToken: string;
   };
+  isLoggedIn: boolean;
 };
 
 const initialState: InitialState = {
@@ -22,11 +23,16 @@ const initialState: InitialState = {
     accessToken: '',
     refreshToken: '',
   },
+  isLoggedIn: false,
 };
 export const authSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    toto: state => {
+      state.isLoggedIn = false;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(login.fulfilled, (state, action) => {
       if (action.payload && 'data' in action.payload) {
@@ -35,6 +41,7 @@ export const authSlice = createSlice({
       if (action.payload && 'tokens' in action.payload) {
         state.tokens.accessToken = action.payload.tokens.accessToken;
       }
+      state.isLoggedIn = true;
     });
     builder.addCase(register.fulfilled, (state, action) => {
       if (action.payload && 'data' in action.payload) {
@@ -44,5 +51,7 @@ export const authSlice = createSlice({
     // builder.addCase(register.rejected, (state, action) => {});
   },
 });
+
+export const {toto} = authSlice.actions;
 
 export default authSlice.reducer;

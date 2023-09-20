@@ -1,61 +1,67 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Login} from '../screens/Login';
 import {Register} from '../screens/Register';
 import {useSelector} from 'react-redux';
-import {Text} from 'react-native';
+// import {Text} from 'react-native';
 import {TabsStack} from './TabsStack';
-import {TheBottomModal} from '../components/TheBottomModal';
+// import {TheBottomModal} from '../components/TheBottomModal';
+import {Help} from '../components/Help';
+import {Conversations} from '../screens/Conversations';
+import {ConversationDetails} from '../screens/ConversationDetails';
+// import {TheBottomModal} from '../components/TheBottomModal';
 
 const RootStack = createNativeStackNavigator();
 
 export function RootStackRouter() {
-  const [initialRoute, setInitialRoute] = useState<string | null>(null);
-  const accessToken = useSelector((state: any) => state.auth.accessToken);
+  // const [initialRoute, setInitialRoute] = useState<string | null>(null);
+  // const accessToken = useSelector((state: any) => state.auth.accessToken);
+  const isLoggedIn = useSelector((state: any) => state.auth.isLoggedIn);
 
-  useEffect(() => {
-    async function checkTokensAndSetNavigation() {
-      try {
-        if (accessToken.accessToken !== null) {
-          setInitialRoute('Tab');
-        } else {
-          setInitialRoute('Login');
-        }
-      } catch (error) {
-        setInitialRoute('Login');
-      }
-    }
+  // useEffect(() => {
+  //   async function checkTokensAndSetNavigation() {
+  //     try {
+  //       if (accessToken.accessToken !== null) {
+  //         setInitialRoute('Tab');
+  //       } else {
+  //         setInitialRoute('Login');
+  //       }
+  //     } catch (error) {
+  //       setInitialRoute('Login');
+  //     }
+  //   }
+  //
+  //   checkTokensAndSetNavigation().then();
+  // }, []);
 
-    checkTokensAndSetNavigation().then();
-  }, []);
-
-  return initialRoute !== null ? (
-    <RootStack.Navigator initialRouteName={initialRoute as 'Login' | 'Tab'}>
-      <RootStack.Group>
-        <RootStack.Screen
-          name="Login"
-          component={Login}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <RootStack.Screen
-          name="Register"
-          component={Register}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <RootStack.Screen
-          name="Tab"
-          component={TabsStack}
-          options={{
-            headerShown: false,
-          }}
-        />
+  return (
+    <RootStack.Navigator>
+      {isLoggedIn ? (
+        // Screens for logged in users
+        <RootStack.Group>
+          <RootStack.Screen
+            name="Tab"
+            component={TabsStack}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="ConversationDetails"
+            component={ConversationDetails}
+          />
+        </RootStack.Group>
+      ) : (
+        // Auth screens
+        <RootStack.Group screenOptions={{headerShown: false}}>
+          <RootStack.Screen name="Login" component={Login} />
+          <RootStack.Screen name="Register" component={Register} />
+        </RootStack.Group>
+      )}
+      {/* Common modal screens */}
+      <RootStack.Group screenOptions={{presentation: 'modal'}}>
+        <RootStack.Screen name="Help" component={Help} />
       </RootStack.Group>
     </RootStack.Navigator>
-  ) : (
-    <Text>Loading</Text>
   );
 }

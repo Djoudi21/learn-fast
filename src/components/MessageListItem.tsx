@@ -8,7 +8,6 @@ type Props = {
 };
 export function MessageListItem({message}: Props) {
   const currentUserId = useSelector((state: any) => state.auth.entity.id);
-  console.log('user', message);
   const setUserStyle = () => {
     return message.userId === currentUserId
       ? 'self-end bg-lavender w-fit max-w-1/2'
