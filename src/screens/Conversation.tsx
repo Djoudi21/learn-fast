@@ -7,7 +7,7 @@ import {Message} from '../use-cases/listMessagesUseCase/types';
 import {BaseTextInput} from '../components/atomics/BaseTextInput';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-export function ConversationDetails({route}) {
+export function Conversation({route}) {
   const [userInput, setUserInput] = useState('');
   const {conversationId} = route.params;
   const messages = useSelector((state: any) => state.messages.messages);

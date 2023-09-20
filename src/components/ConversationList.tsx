@@ -20,7 +20,7 @@ export function ConversationList({conversations, navigation, button}: Props) {
       <TouchableOpacity
         key={conversation.id}
         onPress={() => {
-          navigation.navigate('ConversationDetails', {
+          navigation.navigate('Conversation', {
             conversationId: conversation.id,
           });
         }}>

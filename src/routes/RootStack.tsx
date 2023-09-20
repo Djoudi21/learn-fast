@@ -8,7 +8,7 @@ import {TabsStack} from './TabsStack';
 // import {TheBottomModal} from '../components/TheBottomModal';
 import {Help} from '../components/Help';
 import {Conversations} from '../screens/Conversations';
-import {ConversationDetails} from '../screens/ConversationDetails';
+import {Conversation} from '../screens/Conversation';
 // import {TheBottomModal} from '../components/TheBottomModal';
 
 const RootStack = createNativeStackNavigator();
@@ -46,10 +46,7 @@ export function RootStackRouter() {
               headerShown: false,
             }}
           />
-          <RootStack.Screen
-            name="ConversationDetails"
-            component={ConversationDetails}
-          />
+          <RootStack.Screen name="Conversation" component={Conversation} />
         </RootStack.Group>
       ) : (
         // Auth screens
