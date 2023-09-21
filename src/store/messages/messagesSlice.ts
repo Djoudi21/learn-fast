@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {listMessagesByConversationId} from './listMessagesByConversationId';
+import {createMessage} from './createMessage';
 
 type InitialState = {
   entity: {
@@ -21,18 +22,15 @@ export const messagesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    // builder.addCase(createMessage.fulfilled, (state, action) => {
-    //   // if (action.payload && 'data' in action.payload) {
-    //   //   state.entity = {...action.payload.data};
-    //   // }
-    //   // if (action.payload && 'tokens' in action.payload) {
-    //   //   state.tokens.accessToken = {...action.payload.tokens.accessToken};
-    //   // }
-    // });
     builder.addCase(listMessagesByConversationId.fulfilled, (state, action) => {
       state.messages = action.payload.messages;
     });
-    // builder.addCase(register.rejected, (state, action) => {});
+    builder.addCase(createMessage.fulfilled, (state, action) => {
+      state.messages = [...state.messages, action.payload.response];
+    });
+    builder.addCase(createMessage.rejected, (state, action) => {
+      console.log(action);
+    });
   },
 });
 

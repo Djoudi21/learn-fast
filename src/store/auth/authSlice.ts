@@ -43,6 +43,9 @@ export const authSlice = createSlice({
       }
       state.isLoggedIn = true;
     });
+    builder.addCase(login.rejected, (state, action) => {
+      state.isLoggedIn = false;
+    });
     builder.addCase(register.fulfilled, (state, action) => {
       if (action.payload && 'data' in action.payload) {
         state.entity = action.payload.data;

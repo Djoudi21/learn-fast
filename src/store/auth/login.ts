@@ -8,6 +8,8 @@ export const login = createAsyncThunk(
   async (credentials: Credentials) => {
     const axiosAuthRepository = new AxiosAuthRepository();
     const loginUseCase = new LoginUseCase(axiosAuthRepository);
-    return await loginUseCase.login(credentials);
+    try {
+      return await loginUseCase.login(credentials);
+    } catch (e) {}
   },
 );

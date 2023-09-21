@@ -1,5 +1,5 @@
 export type Conversation = {
-  id: string;
+  id: string | number;
   participants: Participant[];
 };
 
