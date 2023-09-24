@@ -17,7 +17,6 @@ export class AxiosAuthRepository implements AuthRepository {
       const response = await axios.post('http://127.0.0.1:3000/login', {
         data: credentials,
       });
-
       if (response.status === 200) {
         return response.data as LoggedUserResponse;
       }

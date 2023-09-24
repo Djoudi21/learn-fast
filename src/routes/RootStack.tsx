@@ -7,7 +7,6 @@ import {useSelector} from 'react-redux';
 import {TabsStack} from './TabsStack';
 // import {TheBottomModal} from '../components/TheBottomModal';
 import {Help} from '../components/Help';
-import {Conversations} from '../screens/Conversations';
 import {Conversation} from '../screens/Conversation';
 // import {TheBottomModal} from '../components/TheBottomModal';
 
