@@ -31,7 +31,7 @@ export class AxiosMessageRepository implements MessageRepository {
       );
       return response.data;
     } catch (error) {
-      console.log('ERR', error);
+      console.log('error', error);
     }
   }
 }

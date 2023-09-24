@@ -22,10 +22,9 @@ export class AxiosConversationRepository implements ConversationRepository {
       const response = await axios.get(
         `http://127.0.0.1:3000/users/${userId}/conversations`,
       );
-
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('error', error);
     }
   }
 }
