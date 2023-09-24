@@ -13,7 +13,6 @@ export function Conversations({navigation}: Props) {
     (state: RootState) => state.conversations.conversations,
   );
   const userId = useSelector((state: RootState) => state.auth.entity.id);
-
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {

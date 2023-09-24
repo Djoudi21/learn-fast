@@ -14,18 +14,33 @@ import {Message} from '../use-cases/listMessagesUseCase/types';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {createMessage} from '../store/messages/createMessage';
 import {CreateMessageReqBody} from '../use-cases/createMessageUseCase/types';
+import Pusher from 'pusher-js';
 
 export function Conversation({route}) {
   const [userInput, setUserInput] = useState('');
   const {conversationId} = route.params;
-  const messages = useSelector((state: any) => state.messages.messages);
+  const messagesFromStore = useSelector(
+    (state: any) => state.messages.messages,
+  );
+  const [messagesAfterAddingPusher, setMessagesAfterAddingPusher] =
+    useState(messagesFromStore);
   const userId = useSelector((state: any) => state.auth.entity.id);
   const dispatch = useDispatch();
   const insets = useSafeAreaInsets();
+  const pusher = new Pusher('7e86efefa721402f7275', {
+    cluster: 'eu',
+  });
 
   useEffect(() => {
     dispatch(listMessagesByConversationId(conversationId));
   }, [conversationId]);
+
+  useEffect(() => {
+    const channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', (data: any) => {
+      setMessagesAfterAddingPusher([...messagesFromStore, data.message]);
+    });
+  }, []);
 
   const renderItem = (message: Message) => {
     return <MessageListItem message={message} />;
@@ -55,7 +70,7 @@ export function Conversation({route}) {
       className={'bg-[#FDFDFD] h-full'}>
       <FlatList
         className={'w-full'}
-        data={messages}
+        data={messagesAfterAddingPusher}
         renderItem={({item}) => renderItem(item)}
         keyExtractor={item => item.id}
       />
